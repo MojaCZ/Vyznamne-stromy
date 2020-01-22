@@ -1,0 +1,186 @@
+.body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  padding-left: 25px;
+}
+
+h1 {
+  font-size: 20px;
+  padding-left: 25px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 18px;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 0px 2px 4px lightgray;
+}
+
+
+h3 {
+  font-size: 15px;
+}
+
+.menu, .menuSpan {
+  height: 50px;
+  min-height: 50px;
+  width: 100%;
+}
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: lightblue;
+}
+
+.menu a{
+  display: inline-block;
+  padding: 10px;
+  float: right;
+}
+.menu a:hover{
+  background-color: gray;
+  color: white;
+}
+
+.page {
+  display: inline-block;
+  border: 1px solid black;
+  margin: 10px;
+  width: 400px;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.parametry {
+  text-align: center;
+}
+
+.catBlock {
+  border-bottom: 1px solid lightgray;
+}
+
+.parametry input {
+  padding: 20px 0px 0px 0px;
+  margin: 10px auto 10px auto;
+  width: 70%;
+  display: block;
+  border: 0;
+  border-bottom: 1px solid lightgray;
+  margin-left: auto; margin-right: auto;
+}
+
+input {
+  display: block;
+}
+
+.weight {
+  display: inline-block;
+  width: 50px;
+}
+
+
+
+
+
+.radioBtn {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 45px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radioBtn input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.radio, .radioLabel {
+  display: block;
+}
+
+/* Create a custom radio button */
+.radioInput {
+  position: absolute;
+  top: 30px;
+  left: 28px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radioBtn:hover input ~ .radioInput {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radioBtn input:checked ~ .radioInput {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radioInput:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radioBtn input:checked ~ .radioInput:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radioBtn .radioInput:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.footer, .footerSpan {
+  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  width: 100%;
+  clear:both;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+}
+
+.footer ul {
+  float: right;
+  margin: 0;
+}
+
+.footer li{
+  display: inline-block;
+  padding: 10px;
+  font-size: 15px;
+}
+.result {
+  float: left;
+}
