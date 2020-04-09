@@ -1,0 +1,12 @@
+<div class="catBlock"> <!--K11 Stromy připomínající mezníky ve vývoji naší státnosti-->
+  <h3>{{ H }}
+    <input class="weight" type="number" min="0" max="1" step="0.1" ng-model="strom.W11" ng-change="showWeightsK1()">
+  </h3>
+
+  <label *ngFor="let el of checkboxes; let i = index" class="radioBtn">
+    <div class="radioLabel">{{i}}</div>
+    <input type="radio" [checked]="el.value" (click)="change(i)">
+    <span class="radioInput"></span>
+  </label>
+
+</div>

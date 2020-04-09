@@ -1,0 +1,11 @@
+<div class="page">
+  <!--K1 Stromy s kulturně - hisorickým významem-->
+  <h1>Kategorie {{kategorie+1}}</h1>
+  <h2>{{ data[kategorie].H }}</h2>
+  <app-classification-btn-group
+    *ngFor="let item of data[kategorie].subCat; let i = index"
+    [I]=+data[kategorie].subCat[i].I
+    [H]=data[kategorie].subCat[i].H
+    ></app-classification-btn-group>
+  <a class="nextBTN" (click)=click()>DALŠÍ</a>
+</div>

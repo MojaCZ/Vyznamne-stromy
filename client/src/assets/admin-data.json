@@ -1,0 +1,49 @@
+[
+  {
+    "position": { "lat": 40.9161785, "lon": -73.7001808 },
+    "type": "stromořadí",
+    "species": "topol",
+    "date": "5.5.2015",
+    "comment": "this is some comment",
+    "validated": false,
+    "kategorie": {
+      "K1":[1, 2, 1, 1, 2, 0, 0],
+      "K2":[2, 2, 5],
+      "K3":[5, 4],
+      "K4":[3, 1, 1, 5],
+      "K5":[0, 0, 0, 0, 0, 1]
+    }
+  },
+
+  {
+    "position": { "lat": 60.9161785, "lon": -42.7001808 },
+    "type": "strom",
+    "species": "dub",
+    "date": "5.5.2015",
+    "comment": "this is other comment",
+    "validated": false,
+    "kategorie": {
+      "K1":[1, 2, 1, 1, 2, 0, 0],
+      "K2":[2, 2, 5],
+      "K3":[5, 4],
+      "K4":[3, 1, 1, 5],
+      "K5":[0, 0, 0, 0, 0, 1]
+    }
+  },
+
+  {
+    "position": { "lat": 70.9161785, "lon": -95.7001808 },
+    "type": "alej",
+    "species": "buk",
+    "date": "5.5.2015",
+    "comment": "this is some comment",
+    "validated": true,
+    "kategorie": {
+      "K1":[1, 2, 1, 1, 2, 0, 0],
+      "K2":[2, 2, 5],
+      "K3":[5, 4],
+      "K4":[3, 1, 1, 5],
+      "K5":[0, 0, 0, 0, 0, 1]
+    }
+  }
+]
