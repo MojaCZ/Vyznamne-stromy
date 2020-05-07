@@ -1,0 +1,25 @@
+.cat-container {
+  margin: 30px;
+  padding: 0px;
+  margin-top: 50px;
+  font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+}
+
+.sectionHeader{
+  padding: 8px 20px;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+}
+.arrowBTN, .catDiv{
+  float: right;
+}
+
+.nextBTN {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.03);
+}

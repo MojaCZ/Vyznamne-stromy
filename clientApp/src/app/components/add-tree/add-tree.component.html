@@ -1,0 +1,47 @@
+<form [formGroup]="formGroup" class="mat-elevation-z8 addForm">
+
+  <div class="sectionHeader">
+    Parametry stromu
+    <button mat-button class="arrowBTN"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Longitude</mat-label>
+    <input matInput type="number" [value]="lon" formControlName="lonCtrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Latitude</mat-label>
+    <input matInput type="number" [value]="lat" formControlName="latCtrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Typ objektu</mat-label>
+    <mat-select
+      formControlName="typeCtrl"
+      name="objectType">
+      <mat-option *ngFor="let type of objectTypes" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-radio-group class="botanicClasses" formControlName="classCtrl">
+    <mat-radio-button class="treeClass" value="jehlicnate">jehličnaté</mat-radio-button>
+    <mat-radio-button class="treeClass" value="listnate">listnaté</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <mat-label>Botanické jméno</mat-label>
+    <mat-select
+      formControlName="botanicNameCtrl"
+      name="botanicName">
+      <mat-option *ngFor="let name of botanicNames[selectedClass]" [value]="name.value">
+        {{name.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button class="bottomBTNs" style="width: 100%;" [routerLink]="['/kategorie', 0]" routerLinkActive="active">Klasifikovat</button>
+
+</form>

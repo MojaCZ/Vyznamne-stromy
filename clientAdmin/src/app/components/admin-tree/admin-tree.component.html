@@ -1,0 +1,85 @@
+<div class="mat-elevation-z8 form-window">
+  <mat-horizontal-stepper [linear]=true #stepper>
+
+    <!-- ZÁKLADNÍ INFORMACE -->
+    <mat-step [stepControl]="baseFormGroup">
+      <form [formGroup]="baseFormGroup" class="addForm">
+        <ng-template matStepLabel>Základní informace</ng-template>
+        <mat-form-field>
+          <mat-label>Longitude</mat-label>
+          <input matInput formControlName="lonControl">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Latitude</mat-label>
+          <input matInput formControlName="latControl">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Typ</mat-label>
+          <input matInput formControlName="type">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Řád</mat-label>
+          <input matInput formControlName="rad">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Čeleď</mat-label>
+          <input matInput formControlName="celed">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Rod</mat-label>
+          <input matInput formControlName="rod">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Podrod</mat-label>
+          <input matInput formControlName="podrod">
+        </mat-form-field>
+        <div class="bottomBTNs">
+          <button mat-button style="width:100%" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- TYPY OHROŽENÍ -->
+    <mat-step [stepControl]="dangerFormGroup">
+      <form [formGroup]="dangerFormGroup">
+        <ng-template matStepLabel>Ohrožení</ng-template>
+        <app-denger-tree></app-denger-tree>
+        <div class="bottomBTNs">
+          <button mat-button style="width:50%" matStepperPrevious>Back</button>
+          <button mat-button style="width:50%" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- KATEGORIE -->
+    <mat-step [stepControl]="categoryFormGroup">
+      <form [formGroup]="categoryFormGroup">
+        <ng-template matStepLabel>Kategorie</ng-template>
+        <div class="bottomBTNs">
+          <button mat-button style="width:50%" matStepperPrevious>Back</button>
+          <button mat-button style="width:50%" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- SPRÁVCE -->
+    <mat-step [stepControl]="adminFormGroup">
+      <form [formGroup]="adminFormGroup">
+        <ng-template matStepLabel>Správce</ng-template>
+        <mat-form-field>
+          <mat-label>Komentář</mat-label>
+          <input matInput formControlName="comment">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Soubory</mat-label>
+          <input matInput formControlName="files">
+        </mat-form-field>
+        <div class="bottomBTNs">
+          <button mat-button style="width:50%" matStepperPrevious>Back</button>
+          <button mat-button style="width:50%">Odeslat</button>
+        </div>
+      </form>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>

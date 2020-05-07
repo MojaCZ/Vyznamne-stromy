@@ -1,0 +1,18 @@
+<div class="catBlock">
+  <div class="header">{{D.H}}
+    <button mat-button (click)="openDialog()" class="infoBTN"><mat-icon aria-hidden="false">info</mat-icon></button>
+  </div>
+  <div class="content">
+    <mat-radio-group>
+      <mat-radio-button [checked]="true" (change)="getValues(0)" value="0">0</mat-radio-button>
+      <mat-radio-button
+        *ngFor="let btn of D.info; let j = index"
+        [value]="j+1"
+        [checked]="false"
+        (change)="getValues(j+1)"
+        >
+        {{j+1}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
