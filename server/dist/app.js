@@ -4,35 +4,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var express_1 = __importDefault(require("express"));
 var morgan_1 = __importDefault(require("morgan"));
-var users_1 = __importDefault(require("./routes/users"));
-var mysql_1 = __importDefault(require("mysql"));
+var user_routes_1 = __importDefault(require("./routes/user.routes"));
 var app = express_1.default();
-// move this to .env
-var con = mysql_1.default.createConnection({
-    host: "176.222.224.212",
-    user: "moja",
-    password: "4Th,u8U(*]ygE~7G",
-    database: "stromy"
-});
-con.connect(function (err) {
-    if (err)
-        throw err;
-    console.log("Connected!");
-});
-con.query('SELECT * FROM test', function (err, rows) {
-    if (err)
-        throw err;
-    console.log('Data received from Db:');
-    console.log(rows);
-});
+if (process.env.NODE_ENV === "production") {
+    app.use(require("helmet")());
+    app.use(require("compression")());
+}
+else {
+    app.use(require("cors")());
+}
+// var corsOptions = {
+//     origin: "http://localhost:8080"
+// };
+// app.use(cors(corsOptions));
 app.use(morgan_1.default('dev'));
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// app.use(bodyParser.json);
+// app.use(bodyParser.urlencoded({ extended: true}));
 //ROUTES
-app.use("/users", users_1.default);
+app.use("/users", user_routes_1.default);
 app.use(function (req, res, next) {
     var error = new Error('Not found');
     error.status = 404;

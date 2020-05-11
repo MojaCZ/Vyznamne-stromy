@@ -10,19 +10,19 @@ Table USERS will be used for clientAdmin app. This table will contain informatio
     </tr>
     <tr>
         <td>NAME</td>
-        <td>VARCHAR NOT NULL UNIQUE</td>
+        <td>VARCHAR(50) NOT NULL UNIQUE</td>
     </tr>
     <tr>
         <td>EMAIL</td>
-        <td>VARCHAR UNIQUE</td>
+        <td>VARCHAR(50) NOT NULL UNIQUE</td>
+    </tr>
+    <tr>
+        <td>password</td>
+        <td>VARCHAR(50) NOT NULL UNIQUE</td>
     </tr>
     <tr>
         <td>TEL</td>
-        <td>VARCHAR</td>
-    </tr>
-    <tr>
-        <td>SUPER_USER</td>
-        <td>BIT</td>
+        <td>VARCHAR(50)</td>
     </tr>
     <tr>
         <td>JWT</td>

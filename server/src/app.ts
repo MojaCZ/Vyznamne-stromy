@@ -1,45 +1,28 @@
 import express from 'express';
 import morgan from 'morgan';
+import bodyParser from 'body-parser';
 import usersRoutes from './routes/user.routes';
-import mysql from 'mysql';
+
 const app = express();
 
-// move this to .env
-var con = mysql.createConnection({
-    host: "176.222.224.212",
-    user: "moja",
-    password: "4Th,u8U(*]ygE~7G",
-    database: "stromy"
-});
+if (process.env.NODE_ENV === "production") {            
+    app.use(require("helmet")());           
+    app.use(require("compression")());
+} else {
+  app.use(require("cors")());
+}
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
+// var corsOptions = {
+//     origin: "http://localhost:8080"
+// };
 
-con.query('SELECT * FROM test', (err,rows) => {
-    if(err) throw err;
-  
-    console.log('Data received from Db:');
-    console.log(rows);
-});
-
-
-
-
-
-
+// app.use(cors(corsOptions));
 app.use(morgan('dev'))
-
-app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+// app.use(bodyParser.json);
+// app.use(bodyParser.urlencoded({ extended: true}));
 
 //ROUTES
 app.use("/users", usersRoutes);
-
 
 // ERRORS
 interface ResponseError extends Error {
@@ -61,4 +44,4 @@ app.use((error: ResponseError, req: express.Request, res: any, next: express.Nex
     })
 })
   
-  export = app;
+export = app;
