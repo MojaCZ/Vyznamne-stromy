@@ -25,6 +25,11 @@ Table USERS will be used for clientAdmin app. This table will contain informatio
         <td>tel</td>
         <td>VARCHAR(50)</td>
     </tr>
+    <tr>
+        <td>admin</td>
+        <td>BIT</td>
+    </tr>
+
 </table>
 
 ```sql
@@ -36,6 +41,7 @@ CREATE TABLE IF NOT EXISTS user (
   email VARCHAR(50) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   tel VARCHAR(50),
+  admin BIT,
   PRIMARY KEY(id),
   UNIQUE INDEX email_UNIQUE (email ASC),
   UNIQUE INDEX id_UNIQUE (id ASC),
@@ -45,21 +51,84 @@ ENGINE = InnoDB
 AUTO_INCREMENT=2
 DEFAULT CHARACRET SET = utf8;
 ```
+---
 
 <table style="text-align:center"> 
     <tr><th colspan=3> STROM </th></tr>
     <tr>
-        <td>DATIN</td>
-        <td>FLOAT</td>
+        <td>id</td>
+        <td>INT(10) unsigned NOT NULL AUTO_INCREMENT</td>
     </tr>
     <tr>
-        <td>LAT</td>
-        <td>FLOAT</td>
+        <td>IDEX</td>
+        <td>INT(10)</td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td>VARCHAR(50)</td>
+    </tr>
+    <tr>
+        <td>TYP_OBJ</td>
+        <td>VARCHAT(50)</td>
+    </tr>
+    <tr>
+        <td>DATIN</td>
+        <td>DATETIME</td>
+    </tr>
+    <tr>
+        <td>DATAK</td>
+        <td>DATETIME</td>
+    </tr>
+    <tr>
+        <td>DATVY</td>
+        <td>DATETIME</td>
+    </tr>
+    <tr>
+        <td>VLAST</td>
+        <td>ENUM('RVSCR', 'PAMSTR', 'NPUST', 'PARTN')</td>
+    </tr>
+    <tr>
+        <td>EXURL</td>
+        <td>VARCHAR(255)</td>
+    </tr>
+    <tr>
+        <td>IDNAZ</td>
+        <td>VARCHAR(50)</td>
+    </tr>
+    <tr>
+        <td>PRIJEM</td>
+        <td>BIT</td>
     </tr>
 </table>
 
+```sql
+DROP TABLE IF EXISTS strom;
+
+CREATE TABLE IF NOT EXISTS strom (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  IDEX INT(10) UNSIGNED,
+  NAME VARCHAR(50),
+  TYP_OBJ VARCHAR(50) NOT NULL,
+  DATIN DATETIME NOT NULL,
+  DATAK DATETIME,
+  DATVY DATETIME,
+  VLAST ENUM('RVSCR', 'PAMSTR', 'NPUST', 'PARTN'),
+  EXURL VARCHAR(255),
+  IDNAZ VARCHAR(50),
+  PRIJEM BIT,
+  PRIMARY KEY(id),
+)
+ENGINE = InnoDB
+AUTO_INCREMENT=2
+DEFAULT CHARACRET SET = utf8;
+```
+---
 <table style="text-align:center"> 
     <tr><th colspan=3> LOKAL </th></tr>
+    <tr>
+        <td>id</td>
+        <td>INT(10) unsigned NOT NULL AUTO_INCREMENT</td>
+    </tr>
     <tr>
         <td>LON</td>
         <td>FLOAT</td>
@@ -70,39 +139,75 @@ DEFAULT CHARACRET SET = utf8;
     </tr>
 </table>
 
+```sql
+DROP TABLE IF EXISTS lokal;
+
+CREATE TABLE IF NOT EXISTS lokal (
+  strom_id INT(10),
+  LON FLOAT UNSIGNED NOT NULL,
+  LAT FLOAT UNSIGNED NOT NULL,
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
+
 <table style="text-align:center"> 
     <tr><th colspan=3> PISEMNE_D </th></tr>
     <tr>
-        <td>ID_DOC</td>
-        <td>INT(10)</td>
-    </tr>
-    <tr>
-        <td>ID_STROM</td>
+        <td>strom_id</td>
         <td>INT(10)</td>
     </tr>
     <tr>
         <td>URL</td>
-        <td>VARCHAR</td>
+        <td>VARCHAR(255)</td>
     </tr>
 </table>
 
-Table OBRAZOVE_DOC will hold a document url and id of tree it belongs to
+```sql
+DROP TABLE IF EXISTS pisemne_d;
+
+CREATE TABLE IF NOT EXISTS pisemne_d (
+  strom_id INT(10),
+  URL VARCHAR(255) NOT NULL,
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
 
 <table style="text-align:center"> 
     <tr><th colspan=3> OBRAZOVE_D </th></tr>
     <tr>
-        <td>ID_DOC</td>
-        <td>INT(10)</td>
-    </tr>
-    <tr>
-        <td>ID_STROM</td>
+        <td>strom_id</td>
         <td>INT(10)</td>
     </tr>
     <tr>
         <td>URL</td>
-        <td>VARCHAR</td>
+        <td>VARCHAR(255)</td>
     </tr>
 </table>
+
+```sql
+DROP TABLE IF EXISTS obrazove_d;
+
+CREATE TABLE IF NOT EXISTS obrazove_d (
+  strom_id INT(10),
+  URL VARCHAR(255) NOT NULL,
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
 
 Example of KAT1 - '1, 1, 2, 0, 0, 0, 3'
 <table style="text-align:center"> 
@@ -129,6 +234,25 @@ Example of KAT1 - '1, 1, 2, 0, 0, 0, 3'
     </tr>
 </table>
 
+```sql
+DROP TABLE IF EXISTS kateg;
+
+CREATE TABLE IF NOT EXISTS kateg (
+  strom_id INT(10),
+  KATEG1 VARCHAR(50),
+  KATEG2 VARCHAR(50),
+  KATEG3 VARCHAR(50),
+  KATEG4 VARCHAR(50),
+  KATEG5 VARCHAR(50),
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
+
 Example of OHRO1 - 'A,C'
 <table style="text-align:center"> 
     <tr><th colspan=3> OHRO </th></tr>
@@ -154,6 +278,25 @@ Example of OHRO1 - 'A,C'
     </tr>
 </table>
 
+```sql
+DROP TABLE IF EXISTS ohro;
+
+CREATE TABLE IF NOT EXISTS ohro (
+  strom_id INT(10),
+  OHRO1 VARCHAR(50),
+  OHRO2 VARCHAR(50),
+  OHRO3 VARCHAR(50),
+  OHRO4 VARCHAR(50),
+  OHRO5 VARCHAR(50),
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
+
 <table style="text-align:center"> 
     <tr><th colspan=3> COMMENT </th></tr>
     <tr>
@@ -166,3 +309,18 @@ Example of OHRO1 - 'A,C'
     </tr>
 </table>
 
+```sql
+DROP TABLE IF EXISTS comment;
+
+CREATE TABLE IF NOT EXISTS comment (
+  strom_id INT(10),
+  COM_U TEXT NOT NULL,
+  COM_A TEXT NOT NULL,
+  FOREIGN KEY (strom_id)
+    REFERENCES strom(id)
+    ON DELETE CASCADE
+)
+ENGINE = InnoDB
+DEFAULT CHARACRET SET = utf8;
+```
+---
