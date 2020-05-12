@@ -46,7 +46,17 @@ AUTO_INCREMENT=2
 DEFAULT CHARACRET SET = utf8;
 ```
 
-SOME CHANGE
+<table style="text-align:center"> 
+    <tr><th colspan=3> STROM </th></tr>
+    <tr>
+        <td>DATIN</td>
+        <td>FLOAT</td>
+    </tr>
+    <tr>
+        <td>LAT</td>
+        <td>FLOAT</td>
+    </tr>
+</table>
 
 <table style="text-align:center"> 
     <tr><th colspan=3> LOKAL </th></tr>
