@@ -1,6 +1,3 @@
-https://bezkoder.com/node-js-jwt-authentication-mysql/ 
-https://www.admfactory.com/how-to-define-one-to-one-relationship-in-mysql/
-
 Table USERS will be used for clientAdmin app. This table will contain informations about admins and will hold one field which will indicate if user is "ussual" admin or "super" admin
 
 <table style="text-align:center;"> 
