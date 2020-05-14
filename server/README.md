@@ -1,5 +1,6 @@
 Table USERS will be used for clientAdmin app. This table will contain informations about admins and will hold one field which will indicate if user is "ussual" admin or "super" admin
 
+
 <table style="text-align:center;"> 
     <tr><th colspan=3> USERS </th></tr>
     <tr>
