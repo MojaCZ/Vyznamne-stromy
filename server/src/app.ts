@@ -1,7 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import usersRoutes from './routes/user.routes';
+import treeRoutes from './routes/tree.routes';
+// import usersRoutes from './routes/user.routes';
 
 const app = express();
 
@@ -18,11 +19,11 @@ if (process.env.NODE_ENV === "production") {
 
 // app.use(cors(corsOptions));
 app.use(morgan('dev'))
-// app.use(bodyParser.json);
-// app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 //ROUTES
-app.use("/users", usersRoutes);
+app.use("/tree", treeRoutes);
 
 // ERRORS
 interface ResponseError extends Error {

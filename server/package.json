@@ -30,10 +30,8 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
-    "rxjs": "^6.5.5",
-    "sequelize": "^5.21.7"
+    "node-gyp": "^6.1.0",
+    "rxjs": "^6.5.5"
   },
-  "devDependencies": {
-    "@types/sequelize": "^4.28.8"
-  }
+  "devDependencies": {}
 }
