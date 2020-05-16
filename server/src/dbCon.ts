@@ -1,11 +1,12 @@
 import mysql = require('mysql');
+import 'dotenv/config';
 
 // move this to .env
 var con = mysql.createConnection({
-  host: "176.222.224.212",
-  user: "moja",
-  password: "4Th,u8U(*]ygE~7G",
-  database: "stromy"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PW,
+  database: process.env.DB_NAME
 });
 
 con.connect(function(err) {
