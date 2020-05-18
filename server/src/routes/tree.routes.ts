@@ -1,10 +1,10 @@
 import express from 'express';
 const router = express.Router();
 // import con from '../dbCon';
-import {addTree, getTree} from '../controllers/tree.controller'
-
-router.post('/', getTree);
-router.put('/', addTree);
+import { GetTreeById} from '../controllers/get-trees/get-by-id.controller'
+import { AddTreeUser} from '../controllers/add-trees/add-tree-user'
+router.post('/', GetTreeById);
+router.put('/', AddTreeUser);
 
 export = router
 
