@@ -3,9 +3,30 @@ import con from '../../dbCon';
 import { Observable, Observer } from 'rxjs';
 import { Tree } from '../../models/index';
 
+// getTree reaches database find out if tree exists, return true if it does 
+// and return strom_id, strom, lokal, pisemneD, obrazoveD, kateg, comment, ohro
+// if the id doesn't exists it return tree object in default values
+// at frontend check if tree exists with property exist= boolean 
+export function GetTreeById(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const id = req.body.id;
+  const treeObservable = getTreeQuerry(id)
+  treeObservable.subscribe(data => {
+    console.log(data)
+    res.status(200).json({
+      exist: data.exist,
+      strom: data.S,
+      lokal: data.L,
+      pisemneD: data.PD,
+      obrazoveD: data.OD,
+      kateg: data.K,
+      comment: data.C,
+      ohro: data.O
+    })
+  })
+}
 
 const getTreeQuerry = (id: number): Observable<Tree> => {
-  let T: Tree = new Tree(id)
+  let T: Tree = new Tree()
 
   const observable: Observable<Tree> = Observable.create((observer: Observer<Tree>) => {
     con.query(`SELECT * FROM strom where strom_id=${id} LIMIT 0,1`, (err, querry) => {
@@ -48,27 +69,6 @@ const getTreeQuerry = (id: number): Observable<Tree> => {
   return observable;
 }
 
-// getTree reaches database find out if tree exists, return true if it does 
-// and return strom_id, strom, lokal, pisemneD, obrazoveD, kateg, comment, ohro
-// if the id doesn't exists it return tree object in default values
-// at frontend check if tree exists with property exist= boolean 
-export function GetTree(req: express.Request, res: express.Response, next: express.NextFunction) {
-  const id = req.body.id;
-  const treeObservable = getTreeQuerry(id)
-  treeObservable.subscribe(data => {
-    console.log(data)
-    res.status(200).json({
-      exist: data.exist,
-      strom_id: data.strom_id,
-      strom: data.S,
-      lokal: data.L,
-      pisemneD: data.PD,
-      obrazoveD: data.OD,
-      kateg: data.K,
-      comment: data.C,
-      ohro: data.O
-    })
-  })
-}
+
 
 

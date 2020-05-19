@@ -11,4 +11,21 @@ export class PisemneD implements PisemneDI {
       this.URL.push = querry[i].URL;
     }
   }
+
+  getQuerry = (id: number) : string => {
+    let querry: string = `INSERT INTO 
+    pisemne_d (strom_id, URL) 
+    VALUES (${id},${this.URL});`;
+    return querry
+  }
+
+  loadParams = (params: any) => {
+    this.URL = params.URL;
+  }
+
+  _get = (): PisemneDI => {
+    return {
+      "URL": this.URL
+    }
+  }
 }
