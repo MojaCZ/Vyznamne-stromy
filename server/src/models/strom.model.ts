@@ -50,7 +50,7 @@ export class Strom implements StromI {
     this.PRIJEM = params.PRIJEM;
   }
 
-  getQuerry = (id: number) : string => {
+  getQuerry = () : string => {
     let querry: string = `INSERT INTO 
     strom (strom_id, IDEX, NAME, TYP_OBJ, DATIN, DATAK, DATVY, VLAST, EXURL, IDNAZ PRIJEM) 
     VALUES VALUES (NULL, ${this.IDEX}, ${this.NAME}, ${this.TYP_OBJ}, ${this.DATIN}, ${this.DATAK}, ${this.DATVY}, ${this.VLAST}, ${this.EXURL}, ${this.IDNAZ}, ${this.PRIJEM});`;

@@ -13,35 +13,15 @@ export function AddTreeUser(req: express.Request, res: express.Response, next: e
   const comment: CommentI = req.body.comment;
   const ohro: OhroI = req.body.ohro;
   T.loadTree(strom, lokal, pisemneD, obrazoveD, kateg, comment, ohro)
-  
+
   // = req.body.strom;
   T.printTree()
   res.status(200).json({
-          id: 123
-        })
-  // const L: LokalI = req.body.Lokal;
-  // const PD: PisemneDI = req.body.PisemneD;
-  // const OD: ObrazoveDI = req.body.ObrazoveD;
-  // const K: KategI = req.body.Kateg;
-  // const C: CommentI = req.body.Comment;
-  // const O: OhroI = req.body.Ohro;
-
-  // const treeObservable = getTreeQuerry(id)
-  // treeObservable.subscribe(data => {
-  //   console.log(data)
-  //   res.status(200).json({
-  //     exist: data.exist,
-  //     strom_id: data.strom_id,
-  //     strom: data.S,
-  //     lokal: data.L,
-  //     pisemneD: data.PD,
-  //     obrazoveD: data.OD,
-  //     kateg: data.K,
-  //     comment: data.C,
-  //     ohro: data.O
-  //   })
-  // })
+    id: 123
+  })
 }
+
+
 
 // const addTreeQuerry = (tree: Tree) : Observable<number> => {
 //   // let 
@@ -49,7 +29,7 @@ export function AddTreeUser(req: express.Request, res: express.Response, next: e
 // }
 
 // export function AddTreeUser() {
-    
+
 //   res.status(200).json({
 //       id: 123
 //     })

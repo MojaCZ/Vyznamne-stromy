@@ -112,7 +112,7 @@ DEFAULT CHARACTER SET = utf8;
 INSERT INTO user (name, email, password, tel, admin) VALUES ('petr', 'petr@seznam.cz', 'somePW', '775486955', b'0');
 
 -- new tree
-INSERT INTO strom (strom_id, TYP_OBJ, DATIN, VLAST, PRIJEM) VALUES (NULL, 'strom', '13.5.2015', 'APVYS', b'1');
+INSERT INTO strom (strom_id, IDEX, NAME, TYP_OBJ, DATIN, DATAK, DATVY, VLAST, EXURL, IDNAZ PRIJEM) VALUES (NULL, 'strom', '13.5.2015', 'APVYS', b'1');
 
 -- lokal
 INSERT INTO lokal (strom_id, LON, LAT) VALUES ('1', 49.951220, 14.538983); 
