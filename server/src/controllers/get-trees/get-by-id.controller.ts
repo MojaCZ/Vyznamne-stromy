@@ -11,7 +11,6 @@ export function GetTreeById(req: express.Request, res: express.Response, next: e
   const id = req.body.id;
   const treeObservable = getTreeQuerry(id)
   treeObservable.subscribe(data => {
-    console.log(data)
     res.status(200).json({
       exist: data.exist,
       strom: data.S,

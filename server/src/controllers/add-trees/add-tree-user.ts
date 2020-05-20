@@ -63,6 +63,7 @@ const addTreeQuerry = (T: Tree): Observable<any> => {
                   observer.complete();
                   return observable;
                 };
+                console.log("K querry", T.K.getQuerry(id))
                 con.query(T.C.getQuerry(id), (errC, querryC) => {
                   if (errC) {
                     observer.next({status: "err", message: errC.sqlMessage});

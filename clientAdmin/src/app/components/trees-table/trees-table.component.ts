@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TreesTableDataSource, TreesTableItem } from './trees-table-datasource';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-trees-table',
@@ -10,16 +12,52 @@ import { TreesTableDataSource, TreesTableItem } from './trees-table-datasource';
   styleUrls: ['./trees-table.component.scss']
 })
 export class TreesTableComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<TreesTableItem>;
   dataSource: TreesTableDataSource;
 
+  constructor(private http: HttpClient, private changeDetectorRefs: ChangeDetectorRef){}
+
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['species', 'date', 'type', 'K', 'K1', 'K2', 'K3', 'K4', 'K5', 'validate', 'iconEdit', 'iconPrint', 'iconDelete'];
+  displayedColumns = ['date', 'type', 'K', 'K1', 'K2', 'K3', 'K4', 'K5', 'validate', 'iconEdit', 'iconPrint', 'iconDelete'];
 
   ngOnInit() {
-    this.dataSource = new TreesTableDataSource();
+    this.dataSource = new TreesTableDataSource([]);
+    this.getData();
+  }
+
+  getData(){
+    this.http
+      .post(
+        `${environment.server}/tree/getNTrees`,
+        { start: 5, n: 10 },
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        })
+      .subscribe((data: any) => {
+        const treesData: TreesTableItem[] = [];
+        console.log(data);
+        for (const tree of data.trees) {
+          const item: TreesTableItem = {
+            date: tree.S.DATIN,
+            type: tree.S.TYP_OBJ,
+            K: 0,
+            K1: tree.K.KATEG1,
+            K2: tree.K.KATEG2,
+            K3: tree.K.KATEG3,
+            K4: tree.K.KATEG4,
+            K5: tree.K.KATEG5,
+            validate: tree.S.PRIJEM === 0 ? false : true,
+            iconEdit: 'edit',
+            iconPrint: 'print',
+            iconDelete: 'delete'
+          };
+          treesData.push(item);
+        }
+        this.dataSource = new TreesTableDataSource(treesData);
+        this.ngAfterViewInit();
+      });
   }
 
   ngAfterViewInit() {

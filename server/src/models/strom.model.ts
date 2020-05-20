@@ -24,7 +24,6 @@ export class Strom implements StromI {
   PRIJEM: string = "";
 
   loadQuerry = (querry: any) => {
-    console.log(this)
     this.IDEX = querry[0].IDEX !== "" ?  querry[0].IDEX : null;
     this.NAME = querry[0].NAME !== "" ?  querry[0].NAME : null;
     this.TYP_OBJ = querry[0].TYP_OBJ;
@@ -70,30 +69,5 @@ export class Strom implements StromI {
       "IDNAZ": this.IDNAZ,
       "PRIJEM": this.PRIJEM
     }
-  }   
+  }
 };
-
-// INSERT INTO \n' +
-//     '    strom (strom_id, IDEX, NAME, TYP_OBJ, DATIN, DATAK, DATVY, VLAST, EXURL, IDNAZ, PRIJEM) \n' +
-//     '    VALUES (NULL, "123456", "myName", "stromořadí", "13.5.2015", "", "", "APPVS", "", "", "");
-
-
-// I SHOULD ADD TYPE CHECK, SOMETHING LIKE THIS:
-// interface Test {
-//   prop: number;
-// }
-
-// function isTest(arg: any): arg is Test {
-//   return arg && arg.prop && typeof arg.prop == 'number';
-// }
-// Of course, the actual implementation of the isTest function is totally up to you, but the good part is that it's an actual function, which means it's testable.
-
-// Now at runtime you would use isTest() to validate if an object respects an interface. At compile time typescript picks up on the guard and treats subsequent usage as expected, i.e.:
-
-// let a:any = { prop: 5 };
-
-// a.x; //ok because here a is of type any
-
-// if (isTest(a)) {
-//   a.x; //error because here a is of type Test
-// }

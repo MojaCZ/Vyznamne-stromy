@@ -16,7 +16,7 @@ export function CountTrees(req: express.Request, res: express.Response, next: ex
     }
     res.status(200).json({
       "status": 'ok',
-      "message": querry[0]['COUNT(*)']
+      "count": querry[0]['COUNT(*)']
     })
   })
 }
