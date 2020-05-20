@@ -1,16 +1,16 @@
 export interface OhroI {
-  OHRO1: string;
-  OHRO2: string;
-  OHRO3: string;
-  OHRO4: string;
-  OHRO5: string;
+  OHRO1: string | null;
+  OHRO2: string | null;
+  OHRO3: string | null;
+  OHRO4: string | null;
+  OHRO5: string | null;
 }
 export class Ohro implements OhroI {
-  OHRO1: string = "";
-  OHRO2: string = "";
-  OHRO3: string = "";
-  OHRO4: string = "";
-  OHRO5: string = "";
+  OHRO1: string | null = "";
+  OHRO2: string | null = "";
+  OHRO3: string | null = "";
+  OHRO4: string | null = "";
+  OHRO5: string | null = "";
   loadQuerry = (querry: any) => {
     if (querry.length <= 0) { return }
     this.OHRO1 = querry[0].OHRO1;
@@ -22,17 +22,17 @@ export class Ohro implements OhroI {
 
   getQuerry = (id: number) : string => {
     let querry: string = `INSERT INTO 
-    kateg (strom_id, OHRO1, OHRO2, OHRO3, OHRO4, OHRO5) 
-    VALUES (${id},${this.OHRO1}, ,${this.OHRO2},${this.OHRO3},${this.OHRO4},${this.OHRO5});`;
+    ohro (strom_id, OHRO1, OHRO2, OHRO3, OHRO4, OHRO5) 
+    VALUES (${id}, ${this.OHRO1}, ${this.OHRO2}, ${this.OHRO3}, ${this.OHRO4}, ${this.OHRO5});`;
     return querry
   }
 
   loadParams = (params: OhroI) => {
-    this.OHRO1 = params.OHRO1;
-    this.OHRO2 = params.OHRO2;
-    this.OHRO3 = params.OHRO3;
-    this.OHRO4 = params.OHRO4;
-    this.OHRO5 = params.OHRO5;
+    this.OHRO1 = params.OHRO1 !== "" ? `'${params.OHRO1}'` : null;
+    this.OHRO2 = params.OHRO2 !== "" ? `'${params.OHRO2}'` : null;
+    this.OHRO3 = params.OHRO3 !== "" ? `'${params.OHRO3}'` : null;
+    this.OHRO4 = params.OHRO4 !== "" ? `'${params.OHRO4}'` : null;
+    this.OHRO5 = params.OHRO5 !== "" ? `'${params.OHRO5}'` : null;
   }
 
   _get = (): OhroI => {

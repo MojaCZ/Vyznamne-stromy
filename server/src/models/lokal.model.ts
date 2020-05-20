@@ -1,11 +1,11 @@
 export interface LokalI {
-  LON: number;
-  LAT: number;
+  LON: string;
+  LAT: string;
 }
 
 export class Lokal implements LokalI {
-  LON: number = 0;
-  LAT: number = 0;
+  LON: string = "";
+  LAT: string = "";
 
   loadQuerry = (querry: any) => {
     if (querry.length <= 0) { return }
@@ -21,8 +21,8 @@ export class Lokal implements LokalI {
   }
 
   loadParams = (params: LokalI) => {
-    this.LON = params.LON;
-    this.LAT = params.LAT;
+    this.LON = `'${params.LON}'`;
+    this.LAT = `'${params.LAT}'`;
   }
 
   _get = (): LokalI => {

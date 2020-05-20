@@ -1,11 +1,17 @@
 import express from 'express';
 const router = express.Router();
 // import con from '../dbCon';
-import { GetTreeById} from '../controllers/get-trees/get-by-id.controller'
-import { AddTreeUser} from '../controllers/add-trees/add-tree-user'
+import { GetTreeById } from '../controllers/get-trees/get-by-id.controller'
+import { AddTreeUser } from '../controllers/add-trees/add-tree-user';
+import { DeleteTreeId } from '../controllers/delete-tree-id';
+import { GetNTrees } from '../controllers/get-trees/get-n-trees.controller'
+import { CountTrees } from '../controllers/countTrees';
 
-router.post('/', GetTreeById);
+router.get('/countTrees', CountTrees);
+router.post('/getById', GetTreeById);
+router.post('/getNTrees', GetNTrees);
 router.put('/', AddTreeUser);
+router.delete('/', DeleteTreeId);
 
 export = router
 

@@ -12,15 +12,19 @@ export class ObrazoveD implements ObrazoveDI {
     }
   }
 
+  // do later for multiple URLS
   getQuerry = (id: number) : string => {
     let querry: string = `INSERT INTO 
     obrazove_d (strom_id, URL) 
-    VALUES (${id},${this.URL});`;
+    VALUES (${id},${this.URL[0]});`;
     return querry
   }
 
-  loadParams(params: ObrazoveDI) {
-    this.URL = params.URL
+  loadParams = (params: any) => {
+    this.URL = []
+    for(let i: number = 0; i<params.URL.length; i++) {
+      this.URL.push(`'${params.URL[i]}'`)
+    }
   }
 
   _get = (): ObrazoveDI => {

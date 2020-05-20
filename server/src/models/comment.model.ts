@@ -20,8 +20,8 @@ export class Comment implements CommentI {
   }
 
   loadParams = (params: CommentI) => {
-    this.COM_U = params.COM_U;
-    this.COM_A = params.COM_A;
+    this.COM_U = `'${params.COM_U}'`;
+    this.COM_A = `'${params.COM_A}'`;
   }
   _get = (): CommentI => {
     return {

@@ -1,14 +1,12 @@
 import express from 'express';
-import con from '../../dbCon';
-import { Observable, Observer } from 'rxjs';
-import { Tree } from '../../models/index';
+import con from '../dbCon';
 
-export function GetNTrees(req: express.Request, res: express.Response, next: express.NextFunction) {
+export function CountTrees(req: express.Request, res: express.Response, next: express.NextFunction) {
   const start = req.body.start || 0;
   let n = req.body.n || 100;
   if (n > 500) {n=500};
   console.log(start, n)
-  con.query(`SELECT * FROM strom LIMIT ${start},${n};`, (err, querry) => {
+  con.query(`SELECT COUNT(*) FROM strom;`, (err, querry) => {
     if(err) {
       res.status(200).json({
         "status": 'err',
@@ -18,7 +16,7 @@ export function GetNTrees(req: express.Request, res: express.Response, next: exp
     }
     res.status(200).json({
       "status": 'ok',
-      "message": querry
+      "message": querry[0]['COUNT(*)']
     })
   })
 }

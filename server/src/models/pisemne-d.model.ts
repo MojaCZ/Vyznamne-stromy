@@ -12,15 +12,19 @@ export class PisemneD implements PisemneDI {
     }
   }
 
+  // do later for multiple URLS
   getQuerry = (id: number) : string => {
     let querry: string = `INSERT INTO 
     pisemne_d (strom_id, URL) 
-    VALUES (${id},${this.URL});`;
+    VALUES (${id},${this.URL[0]});`;
     return querry
   }
 
   loadParams = (params: any) => {
-    this.URL = params.URL;
+    this.URL = []
+    for(let i: number = 0; i<params.URL.length; i++) {
+      this.URL.push(`'${params.URL[i]}'`)
+    }
   }
 
   _get = (): PisemneDI => {
