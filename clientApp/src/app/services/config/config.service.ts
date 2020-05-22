@@ -12,6 +12,6 @@ export class ConfigService implements Resolve<any> {
   constructor(private http: HttpClient) { }
 
   resolve(){
-    return this.http.get("assets/config-app.json").pipe(share());
+    return this.http.get('assets/config-app.json').pipe(share());
   }
 }

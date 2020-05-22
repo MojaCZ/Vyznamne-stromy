@@ -1,11 +1,5 @@
 <div class="mat-elevation-z8 data-table">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- species Column -->
-    <ng-container matColumnDef="species">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>species</th>
-      <td mat-cell *matCellDef="let row">{{row.species}}</td>
-    </ng-container>
-
     <!-- date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>date</th>
@@ -56,18 +50,17 @@
     <!-- printBTN Column -->
     <ng-container matColumnDef="iconPrint">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Print</th>
-      <td mat-cell *matCellDef="let row" [routerLink]="['/print']"><button mat-button class="iconBTN"><mat-icon>{{row.iconPrint}}</mat-icon></button></td>
+      <td mat-cell *matCellDef="let row" [routerLink]="['/print']"><button mat-button class="iconBTN"><mat-icon>print</mat-icon></button></td>
     </ng-container>
     <!-- editBTN Column -->
     <ng-container matColumnDef="iconEdit">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit</th>
-      <td mat-cell *matCellDef="let row" [routerLink]="['/strom']"><button mat-button class="iconBTN"><mat-icon>{{row.iconEdit}}</mat-icon></button></td>
+      <td mat-cell *matCellDef="let row" [routerLink]="['/strom']"><button mat-button class="iconBTN"><mat-icon>edit</mat-icon></button></td>
     </ng-container>
-
     <!-- deleteBTN Column -->
     <ng-container matColumnDef="iconDelete">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
-      <td mat-cell *matCellDef="let row"><button mat-button class="iconBTN"><mat-icon>{{row.iconDelete}}</mat-icon></button></td>
+      <td mat-cell *matCellDef="let row"><button mat-button class="iconBTN" (click)="delete(row.iconDelete)"><mat-icon>delete</mat-icon></button></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

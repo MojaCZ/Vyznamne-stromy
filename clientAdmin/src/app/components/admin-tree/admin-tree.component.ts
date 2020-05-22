@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -26,21 +26,21 @@ export class AdminTreeComponent implements OnInit {
       celed: [''],
       rod: [''],
       podrod: ['']
-    })
+    });
     this.dangerFormGroup = this.formBuilder.group({
-      A:[''],
-      B:[''],
-      C:[''],
-      D:[''],
-      E:['']
-    })
+      A: [''],
+      B: [''],
+      C: [''],
+      D: [''],
+      E: ['']
+    });
     this.categoryFormGroup = this.formBuilder.group({
 
-    })
+    });
     this.adminFormGroup = this.formBuilder.group({
       comment: ['', Validators.maxLength(300)],
       files: ['']
-    })
+    });
 
   }
 }
