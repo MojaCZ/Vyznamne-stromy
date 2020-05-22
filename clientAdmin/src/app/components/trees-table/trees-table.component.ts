@@ -11,12 +11,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./trees-table.component.scss']
 })
 export class TreesTableComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<TreesTableItem>;
   dataSource: TreesTableDataSource;
 
-  constructor(private http: HttpClient, private changeDetectorRefs: ChangeDetectorRef){}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['date', 'type', 'K', 'K1', 'K2', 'K3', 'K4', 'K5', 'validate', 'iconEdit', 'iconPrint', 'iconDelete'];
@@ -26,18 +26,22 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
     this.getData();
   }
 
-  getData(){
+  getData() {
+    const start = 0;
+    const n = 10;
+    const body = `start=${start}&n=${n}`;
     this.http
       .post(
         `${environment.server}/tree/getNTrees`,
-        { start: 5, n: 10 },
+        body,
         {
           headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         })
       .subscribe((data: any) => {
-        const treesData: TreesTableItem[] = [];
+        const newData: TreesTableItem[] = [];
         for (const tree of data.trees) {
           const item: TreesTableItem = {
+            id: tree.id,
             date: tree.S.DATIN,
             type: tree.S.TYP_OBJ,
             K: 0,
@@ -51,35 +55,42 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
             iconPrint: tree.id,
             iconDelete: tree.id
           };
-          treesData.push(item);
+          newData.push(item);
         }
-        this.dataSource = new TreesTableDataSource(treesData);
-        this.ngAfterViewInit();
+        this.refresh(newData);
+        // this.dataSource = new TreesTableDataSource(newData);
+        // this.ngAfterViewInit();
       });
+  }
+
+
+
+  delete(id) {
+    console.log('this is ID', id);
+    const body = `id=${id}`;
+    this.http
+      .post(
+        `${environment.server}/tree/deleteId`,
+        body,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        })
+      .subscribe((data: any) => {
+        if (data.status === 'ok') {
+          const newData: TreesTableItem[] = this.dataSource.remove(id);
+          this.refresh(newData);
+        }
+      });
+  }
+
+  refresh(newData: TreesTableItem[]) {
+    this.dataSource = new TreesTableDataSource(newData);
+    this.ngAfterViewInit();
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
-  }
-
-  delete(id) {
-    console.log(id);
-    const options = {
-      headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
-      body: {
-        id,
-      }
-    };
-    this.http
-      .request(
-        'DELETE',
-        `${environment.server}/tree`,
-        {
-          headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
-          body: { id }
-        })
-      .subscribe((data: any) => { console.log(data); });
   }
 }

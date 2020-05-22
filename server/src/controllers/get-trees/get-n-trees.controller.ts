@@ -4,6 +4,8 @@ import { Observable, Observer } from 'rxjs';
 import { Tree } from '../../models/index';
 
 export function GetNTrees(req: express.Request, res: express.Response, next: express.NextFunction) {
+  console.log(req.body)
+  console.log(req.body.start)
   const start = req.body.start || 0;
   let n = req.body.n || 100;
   if (n > 500) {n=500};

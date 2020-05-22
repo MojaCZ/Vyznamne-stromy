@@ -10,8 +10,8 @@ import { CountTrees } from '../controllers/countTrees';
 router.get('/countTrees', CountTrees);
 router.post('/getById', GetTreeById);
 router.post('/getNTrees', GetNTrees);
+router.post('/deleteId', DeleteTreeId);
 router.put('/', AddTreeUser);
-router.delete('/', DeleteTreeId);
 
 export = router
 

@@ -6,7 +6,7 @@ import { Observable, Observer } from 'rxjs';
 export function DeleteTreeId(req: express.Request, res: express.Response, next: express.NextFunction) {
   const id = req.body.id;
   console.log(req.body)
-  console.log("Delete: ", id);
+  console.log("Delete: ", id, req.body.s);
   if(id === undefined) {
     res.status(200).json({
       status: "err",

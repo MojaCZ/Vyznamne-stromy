@@ -6,6 +6,7 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface TreesTableItem {
+  id: number;
   date: string;
   type: string;
   K: number;
@@ -34,10 +35,21 @@ export class TreesTableDataSource extends DataSource<TreesTableItem> {
     super();
   }
 
-// loadData(trees: TreesTableItem[]){
-//   this.data = trees;
-//   this.connect()
-// }
+  /** FOREACH function cannot be stoped or brake, only by throwing exception,
+   * so when I used foreach here and wanted to return in loop, it continued executing
+   * I have to use a classic for() loop
+   * 
+   * @param id id of tree to be removed */
+
+  remove(id: number): TreesTableItem[] {
+    for(let i = 0; i < this.data.length; i++) {
+      if (this.data[i].id === id) {
+        this.data.splice(i, 1);
+        return this.data;
+      }
+    }
+    return this.data;
+  }
 
 /**
  * Connect this data source to the table. The table will only update when
