@@ -24,6 +24,7 @@ export function GetNTrees(req: express.Request, res: express.Response, next: exp
       let id = querry[i].strom_id;
       let treeObservable = getTreeQuerry(id)
       treeObservable.subscribe(T => {
+        T.id = id;
         Trees.push(T);
         if(i+1 == querry.length) {
           res.status(200).json({

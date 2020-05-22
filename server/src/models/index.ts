@@ -15,6 +15,7 @@ export * from './ohro.model';
 
 export class Tree {
   exist: boolean = false;
+  id: string = '';
   S: Strom = new Strom()
   L: Lokal = new Lokal()
   PD: PisemneD = new PisemneD()

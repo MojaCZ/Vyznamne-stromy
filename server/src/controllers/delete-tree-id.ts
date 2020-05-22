@@ -5,8 +5,16 @@ import { Observable, Observer } from 'rxjs';
 
 export function DeleteTreeId(req: express.Request, res: express.Response, next: express.NextFunction) {
   const id = req.body.id;
-  console.log(id)
-  const querry = `DELETE FROM strom WHERE strom_id=${18}`;
+  console.log(req.body)
+  console.log("Delete: ", id);
+  if(id === undefined) {
+    res.status(200).json({
+      status: "err",
+      message: 'you have to provide id'
+    })
+    return;
+  }
+  const querry = `DELETE FROM strom WHERE strom_id=${id}`;
   con.query(querry, (err, querry) => {
     if(err) {
       res.status(200).json({

@@ -4,8 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TreesTableDataSource, TreesTableItem } from './trees-table-datasource';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-trees-table',
   templateUrl: './trees-table.component.html',
@@ -37,7 +36,6 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
         })
       .subscribe((data: any) => {
         const treesData: TreesTableItem[] = [];
-        console.log(data);
         for (const tree of data.trees) {
           const item: TreesTableItem = {
             date: tree.S.DATIN,
@@ -49,9 +47,9 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
             K4: tree.K.KATEG4,
             K5: tree.K.KATEG5,
             validate: tree.S.PRIJEM === 0 ? false : true,
-            iconEdit: 'edit',
-            iconPrint: 'print',
-            iconDelete: 'delete'
+            iconEdit: tree.id,
+            iconPrint: tree.id,
+            iconDelete: tree.id
           };
           treesData.push(item);
         }
@@ -64,5 +62,24 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  delete(id) {
+    console.log(id);
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
+      body: {
+        id,
+      }
+    };
+    this.http
+      .request(
+        'DELETE',
+        `${environment.server}/tree`,
+        {
+          headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}),
+          body: { id }
+        })
+      .subscribe((data: any) => { console.log(data); });
   }
 }
