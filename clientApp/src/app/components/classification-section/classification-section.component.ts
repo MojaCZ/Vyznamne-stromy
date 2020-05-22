@@ -14,10 +14,10 @@ export class ClassificationSectionComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.configData)
+    console.log(this.configData);
     this.route.paramMap.subscribe(params => {
-      this.kategorie = +params.get("kategorie");
-    })
+      this.kategorie = +params.get('kategorie');
+    });
 
     this.route.data.subscribe(data => {
       this.configData = data.Kategorie[this.kategorie];
