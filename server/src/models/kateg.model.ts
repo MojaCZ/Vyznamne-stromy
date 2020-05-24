@@ -1,10 +1,4 @@
-export interface KategI {
-  KATEG1: string | null;
-  KATEG2: string | null;
-  KATEG3: string | null;
-  KATEG4: string | null;
-  KATEG5: string | null;
-}
+import { KategI } from '../../../lib';
 
 export class Kateg implements KategI {
   KATEG1: string | null = "";

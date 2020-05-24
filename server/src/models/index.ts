@@ -1,19 +1,21 @@
-import { Strom, StromI } from './strom.model'
-import { Comment, CommentI } from './comment.model'
-import { Lokal, LokalI } from './lokal.model'
-import { PisemneD, PisemneDI } from './pisemne-d.model'
-import { ObrazoveD, ObrazoveDI } from './obrazove-d.model'
-import { Kateg, KategI } from './kateg.model'
-import { Ohro, OhroI } from './ohro.model';
-export * from './strom.model'
-export * from './comment.model'
-export * from './lokal.model'
-export * from './pisemne-d.model'
-export * from './obrazove-d.model'
-export * from './kateg.model'
+import { Strom } from './strom.model';
+import { Comment} from './comment.model';
+import { Lokal } from './lokal.model';
+import { PisemneD } from './pisemne-d.model';
+import { ObrazoveD } from './obrazove-d.model';
+import { Kateg } from './kateg.model';
+import { Ohro } from './ohro.model';
+import { TreeI, StromI, LokalI, PisemneDI, ObrazoveDI, KategI, CommentI, OhroI } from '../../../lib';
+
+export * from './strom.model';
+export * from './comment.model';
+export * from './lokal.model';
+export * from './pisemne-d.model';
+export * from './obrazove-d.model';
+export * from './kateg.model';
 export * from './ohro.model';
 
-export class Tree {
+export class Tree implements TreeI {
   exist: boolean = false;
   id: string = '';
   S: Strom = new Strom()

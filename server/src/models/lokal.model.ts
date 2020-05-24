@@ -1,7 +1,4 @@
-export interface LokalI {
-  LON: string;
-  LAT: string;
-}
+import { LokalI } from '../../../lib';
 
 export class Lokal implements LokalI {
   LON: string = "";

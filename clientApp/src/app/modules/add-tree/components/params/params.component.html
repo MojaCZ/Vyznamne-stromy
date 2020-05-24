@@ -1,0 +1,43 @@
+<form [formGroup]="formGroup" class="mat-elevation-z8 addForm" (ngSubmit)="onSubmit()">
+
+  <div class="sectionHeader">
+    Parametry stromu
+    <button type="submit" mat-button class="arrowBTN">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Jméno</mat-label>
+    <input matInput type="string" formControlName="nameCtrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Longitude</mat-label>
+    <input matInput type="string" formControlName="lonCtrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Latitude</mat-label>
+    <input matInput type="string" formControlName="latCtrl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Typ objektu</mat-label>
+    <mat-select formControlName="typeCtrl" name="objectType">
+      <mat-option *ngFor="let type of objectTypes" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Datum přidání stromu</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateCtrl">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-button type="submit" class="bottomBTNs" style="width: 100%;">Klasifikovat</button>
+
+</form>

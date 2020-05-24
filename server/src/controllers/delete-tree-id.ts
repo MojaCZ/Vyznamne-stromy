@@ -1,7 +1,5 @@
 import express from 'express';
 import con from '../dbCon';
-import { Observable, Observer } from 'rxjs';
-// import { Tree } from '../../models/index';
 
 export function DeleteTreeId(req: express.Request, res: express.Response, next: express.NextFunction) {
   const id = req.body.id;

@@ -9,27 +9,28 @@ import { MaterialModule } from './materials.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
-import { ClassificationBtnGroupComponent }  from './components/classification-section/classification-btn-group/classification-btn-group.component';
-import { NavigationComponent }              from './components/navigation/navigation.component';
-import { ClassificationSectionComponent }   from './components/classification-section/classification-section.component';
-import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
-import { AddTreeComponent } from './components/add-tree/add-tree.component';
 
-import { ClassificationDataService }           from './services/classification-data/classification-data.service';
-import { ConfigService }           from './services/config/config.service';
+// components
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+
+// services
+import { ClassificationDataService } from './services/classification-data/classification-data.service';
+import { ConfigService } from './services/config/config.service';
+
+// modules
+import { AddTreeModule } from './modules/add-tree/add-tree.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClassificationBtnGroupComponent,
     NavigationComponent,
-    ClassificationSectionComponent,
     InfoDialogComponent,
-    AddTreeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AddTreeModule,
     MaterialModule,
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-
+import { CommentI } from '../../../../../shared/tree.interface';
 
 @Component({
   selector: 'app-admin-tree',
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin-tree.component.scss']
 })
 export class AdminTreeComponent implements OnInit {
+  @Input()
+    date: ;
 
   baseFormGroup: FormGroup;
   dangerFormGroup: FormGroup;

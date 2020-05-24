@@ -1,7 +1,8 @@
 import express from 'express';
 import con from '../../dbCon';
 import { Observable, Observer } from 'rxjs';
-import { Tree, StromI, CommentI, LokalI, PisemneDI, ObrazoveDI, KategI, OhroI, PisemneD } from '../../models/index';
+import { Tree } from '../../models';
+import { StromI, CommentI, LokalI, PisemneDI, ObrazoveDI, KategI, OhroI } from '../../../../lib';
 
 export function AddTreeUser(req: express.Request, res: express.Response, next: express.NextFunction) {
   const T: Tree = new Tree()

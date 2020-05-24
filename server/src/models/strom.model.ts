@@ -1,15 +1,4 @@
-export interface StromI {
-  IDEX: string|null;
-  NAME: string|null;
-  TYP_OBJ: string;
-  DATIN: string;
-  DATAK: string | null;
-  DATVY: string | null;
-  VLAST: string;
-  EXURL: string | null;
-  IDNAZ: string | null;
-  PRIJEM: string;
-}
+import { StromI } from '../../../lib/src';
 
 export class Strom implements StromI {
   IDEX: string | null = null;

@@ -1,7 +1,4 @@
-export interface CommentI {
-  COM_U: string;
-  COM_A: string;
-}
+import {CommentI} from '../../../lib';
 
 export class Comment implements CommentI {
   COM_U: string = "";

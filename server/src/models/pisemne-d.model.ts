@@ -1,6 +1,4 @@
-export interface PisemneDI {
-  URL: string[];
-}
+import { PisemneDI } from '../../../lib/src'
 
 export class PisemneD implements PisemneDI {
   URL: string[] = [];

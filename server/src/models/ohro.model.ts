@@ -1,10 +1,5 @@
-export interface OhroI {
-  OHRO1: string | null;
-  OHRO2: string | null;
-  OHRO3: string | null;
-  OHRO4: string | null;
-  OHRO5: string | null;
-}
+import { OhroI } from '../../../lib'
+
 export class Ohro implements OhroI {
   OHRO1: string | null = "";
   OHRO2: string | null = "";

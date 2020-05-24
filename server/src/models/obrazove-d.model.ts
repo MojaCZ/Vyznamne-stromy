@@ -1,6 +1,4 @@
-export interface ObrazoveDI {
-  URL: string[];
-}
+import { ObrazoveDI } from '../../../lib';
 
 export class ObrazoveD implements ObrazoveDI {
   URL: string[] = [];
