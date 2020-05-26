@@ -4,7 +4,7 @@ export class Strom implements StromI {
   IDEX: string | null = null;
   NAME: string | null = null;
   TYP_OBJ: string = "";
-  DATIN: string = "";
+  DATIN: string | Date = "";
   DATAK: string | null = null;
   DATVY: string | null = null;
   VLAST: string = "";

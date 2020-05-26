@@ -95,8 +95,6 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
     console.log(tree);
   }
 
-
-
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

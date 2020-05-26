@@ -11,7 +11,7 @@ router.get('/countTrees', CountTrees);
 router.post('/getById', GetTreeById);
 router.post('/getNTrees', GetNTrees);
 router.post('/deleteId', DeleteTreeId);
-router.put('/', AddTreeUser);
+router.post('/addTreeUser', AddTreeUser);
 
 export = router
 

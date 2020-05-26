@@ -6,14 +6,16 @@
     <button *ngIf="+kategorie===0" mat-button class="arrowBTN" routerLink='/parameters'><mat-icon>keyboard_arrow_left</mat-icon></button>
     <button *ngIf="+kategorie!==0" mat-button class="arrowBTN" [routerLink]="['/kategorie', +kategorie-1]"><mat-icon>keyboard_arrow_left</mat-icon></button>
   </div>
+  
   <div *ngIf="configData">
-
     <div *ngFor="let groupD of configData.subCat; let i = index">
       <app-btn-group
       [kategorie]=kategorie [groupIndex]=i
       ></app-btn-group>
     </div>
   </div>
+
   <button mat-button class="nextBTN" [routerLink]="['/kategorie', +kategorie+1]" routerLinkActive="active" *ngIf="kategorie!=4">Další</button>
-  <button mat-button class="nextBTN" routerLink='/' *ngIf="kategorie==4">Odeslat</button>
+  <button mat-button class="nextBTN" (click)="submit()" *ngIf="kategorie==4">Odeslat</button>
+
 </div>

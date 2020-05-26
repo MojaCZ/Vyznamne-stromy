@@ -1,4 +1,4 @@
-import { KategI } from '../../../lib';
+import { KategI } from '../../../lib/src';
 
 export class Kateg implements KategI {
   KATEG1: string | null = "";

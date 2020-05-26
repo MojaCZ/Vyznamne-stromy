@@ -4,11 +4,11 @@
   </div>
   <div class="content">
     <mat-radio-group *ngIf="groupData">
-      <mat-radio-button [checked]="true" (change)="getValues(0)" value="0">0</mat-radio-button>
+      <mat-radio-button [checked]=checkedArray[0] (change)="getValues(0)" value="0">0</mat-radio-button>
       <mat-radio-button
         *ngFor="let btn of groupData.info; let j = index"
         [value]="j+1"
-        [checked]="false"
+        [checked]=checkedArray[j+1]
         (change)="getValues(j+1)"
         >
         {{j+1}}

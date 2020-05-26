@@ -1,4 +1,4 @@
-import { LokalI } from '../../../lib';
+import { LokalI } from '../../../lib/src';
 
 export class Lokal implements LokalI {
   LON: string = "";

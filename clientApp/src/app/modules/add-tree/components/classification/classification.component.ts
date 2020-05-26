@@ -13,25 +13,18 @@ export class ClassificationComponent implements OnInit {
   katData: string[];
   configData: ClassificationInterface;
 
-  // cData stends for classification data
   constructor(private route: ActivatedRoute, private router: Router, private addTreeService: AddTreeService) {
-    if (this.kategorie < 0 || this.kategorie > 4) {
-      console.log('not allowed route!!!');
-      this.router.navigate(['/kategorie/0']);
-    }
-    this.kategorie = this.route.snapshot.params.kategorie;
-    console.log('AddTreeService', addTreeService)
-    this.configData = addTreeService.ConfKData[this.kategorie];
   }
 
-  ngOnInit(): void {
-
-
-
-
+  ngOnInit(){
+    this.route.params.subscribe((params) => {
+      this.kategorie = params.kategorie;
+      this.configData = this.addTreeService.ConfKData[this.kategorie];
+    });
   }
 
-  loadKatData(data: string) {
-    console.log(data.split(','));
+  submit(){
+    this.addTreeService.send();
   }
+
 }
