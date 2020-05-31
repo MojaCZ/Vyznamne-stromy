@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   MatButtonModule,
@@ -28,8 +29,9 @@ const modules = [
   MatInputModule,
   MatCheckboxModule,
   MatStepperModule,
-  MatTreeModule
-]
+  MatTreeModule,
+  MatTooltipModule
+];
 
 @NgModule({
   imports: modules,

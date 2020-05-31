@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" class="mat-elevation-z8 addForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="formGroup" class="mat-elevation-z8 addForm">
 
   <div class="sectionHeader">
     Parametry stromu
@@ -38,6 +38,12 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-button type="submit" class="bottomBTNs" style="width: 100%;">Klasifikovat</button>
+  <mat-form-field>
+    <mat-label>Komentář</mat-label>
+    <input matInput type="string" formControlName="commentCtrl">
+  </mat-form-field>
+
+  <button mat-button (click)="submit(false)" type="submit" class="bottomBTNs" style="width: 100%;">Odeslat</button>
+  <button mat-button (click)="submit(true)" type="submit" class="bottomBTNs" style="width: 100%;">Klasifikovat</button>
 
 </form>

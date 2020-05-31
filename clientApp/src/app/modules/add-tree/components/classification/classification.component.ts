@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddTreeService } from '../../services/add-tree.service';
 import { ClassificationInterface } from '../../../../../../../lib/src';
+
 @Component({
   selector: 'app-classification',
   templateUrl: './classification.component.html',
@@ -24,7 +25,15 @@ export class ClassificationComponent implements OnInit {
   }
 
   submit(){
-    this.addTreeService.send();
+    this.addTreeService.send()
+    .subscribe((data: any) => {
+      console.log(data);
+      if (data.message.status === 'ok') {
+        this.router.navigate(['/done']);
+      } else {
+        alert(`Vyskytla se chyba!, zpráva je: ${data.message.message}`);
+      }
+    });
   }
 
 }

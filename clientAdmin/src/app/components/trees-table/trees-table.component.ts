@@ -5,8 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { TreesTableDataSource, TreesTableItem } from './trees-table-datasource';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { ClassificationSchema, ClassificationInterface, Weights} from '../../../../../lib/src';
 
 
 @Component({
@@ -18,7 +17,12 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<TreesTableItem>;
+
+  /** class storing data for table */
   dataSource: TreesTableDataSource;
+
+  /** interface schema for categorization */
+  public schema: ClassificationInterface[] = ClassificationSchema;
 
   constructor(private http: HttpClient) { }
 
@@ -30,10 +34,13 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
     this.getData();
   }
 
+  /** tak toto je hnus, to by chtělo trochu upravit */
   getData() {
     const start = 0;
     const n = 10;
+
     const body = `start=${start}&n=${n}`;
+
     this.http
       .post(
         `${environment.server}/tree/getNTrees`,
@@ -48,18 +55,31 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
           }
           const newData: TreesTableItem[] = [];
           for (const tree of data.trees) {
+            const kArr: number[] = [
+              this.kValue(tree.K.KATEG1, Weights.w1),
+              this.kValue(tree.K.KATEG2, Weights.w2),
+              this.kValue(tree.K.KATEG3, Weights.w3),
+              this.kValue(tree.K.KATEG4, Weights.w4),
+              this.kValue(tree.K.KATEG5, Weights.w5)
+            ];
+            let kValue = 0;
+            for (let j = 0; j < kArr.length; j++) {
+              kValue += kArr[j] * Weights.W[j]
+            }
+            kValue = Math.round(kValue * 100) / 100;
+
             const item: TreesTableItem = {
               id: tree.id,
-              date: tree.S.DATIN,
+              date: tree.S.DATIN.split('T')[0],
               type: tree.S.TYP_OBJ,
-              K: 0,
-              K1: tree.K.KATEG1,
-              K2: tree.K.KATEG2,
-              K3: tree.K.KATEG3,
-              K4: tree.K.KATEG4,
-              K5: tree.K.KATEG5,
+              K: kValue,
+              K1: kArr[0],
+              K2: kArr[1],
+              K3: kArr[2],
+              K4: kArr[3],
+              K5: kArr[4],
               validate: tree.S.PRIJEM === 0 ? false : true,
-              iconEdit: tree,
+              iconEdit: tree.id,
               iconPrint: tree.id,
               iconDelete: tree.id
             };
@@ -72,6 +92,19 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
   refresh(newData: TreesTableItem[]) {
     this.dataSource = new TreesTableDataSource(newData);
     this.ngAfterViewInit();
+  }
+
+  kValue(K: string, W: number[]): number {
+    const k = K.split(',');
+    if (k.length !== W.length) {
+      console.log('oou, length not same, something went wrong');
+    }
+    let V = 0;
+    for (let i = 0; i < k.length; i++) {
+      V += +k[i] * W[i];
+    }
+    V = Math.round(V * 100) / 100;
+    return V;
   }
 
   delete(id) {

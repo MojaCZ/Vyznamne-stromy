@@ -9,35 +9,28 @@ import { NewTreeComponent} from './components/new-tree/new-tree.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
 
 // SERVICES
-import { AdminTableService } from './services/admin-table/admin-table.service';
-import { ConfigService } from './services/config/config.service';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: TreesTableComponent,
-    // resolve: { Admin: AdminTableService }
+    component: TreesTableComponent
   },
   {
-    path: 'strom',
-    component: AdminTreeComponent,
-    resolve: { Config: ConfigService }
+    path: 'strom/:id',
+    component: AdminTreeComponent
   },
   {
     path: 'print',
-    component: PrintTreeComponent,
-    // resolve: { Admin: AdminTableService }
+    component: PrintTreeComponent
   },
   {
     path: 'new-tree',
-    component: NewTreeComponent,
-    // resolve: { Admin: AdminTableService }
+    component: NewTreeComponent
   },
   {
     path: 'users',
-    component: ListUsersComponent,
-    // resolve: { Admin: AdminTableService }
+    component: ListUsersComponent
   }
 ];
 

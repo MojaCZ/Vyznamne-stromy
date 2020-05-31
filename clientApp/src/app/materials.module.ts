@@ -13,6 +13,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   MatButtonModule,
@@ -28,8 +29,9 @@ const modules = [
   MatRadioModule,
   MatSelectModule,
   MatDatepickerModule,
-  MatNativeDateModule
-]
+  MatNativeDateModule,
+  MatTooltipModule
+];
 
 @NgModule({
   imports: modules,

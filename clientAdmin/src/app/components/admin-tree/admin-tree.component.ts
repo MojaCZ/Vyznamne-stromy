@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 // import { CommentI } from '../../../../../shared/tree.interface';
 
 @Component({
@@ -16,9 +17,16 @@ export class AdminTreeComponent implements OnInit {
   categoryFormGroup: FormGroup;
   adminFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = params.id;
+        console.log(`${id}`);
+      }
+    );
+
     this.baseFormGroup = this.formBuilder.group({
       lonControl: [''],
       latControl: [''],

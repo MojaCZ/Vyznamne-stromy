@@ -1,1 +1,7 @@
 building process, to build all blocks with lib folder
+
+CHANGE TIME FROM string | Data to only string !!! HOT 
+
+DO I NEED TO GET TIME WITH DATE? 
+
+DaTUM from clientApp to server wrong, probably date parsing in parameters component clientApp

@@ -1,19 +1,27 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
-import { AddTreeModule } from '../add-tree.module';
+// import { share } from 'rxjs/operators';
+// import { AddTreeModule } from '../add-tree.module';
 import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../../lib/src';
 import { environment } from '../../../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 
 export class AddTreeService implements OnDestroy {
 
+  /** class keeping all informations about tree user is editing */
   public T: TreeI = new Tree();
+
+  /** matrix of classification elements user filled in */
   public kData: number[][] = [];
+
+  /** structure of object holding texts in configuration file */
   public ConfKData: ClassificationInterface[];
+
+  /** message returned from server */
+  public message: any;
 
   constructor(private http: HttpClient) {
     this.ConfKData = ClassificationSchema;
@@ -26,28 +34,28 @@ export class AddTreeService implements OnDestroy {
     }
   }
 
-  send() {
-    this.parseKateg();
+  /** send form to backend and return observable of response */
+  send(): Observable<any> {
+    this.prepareData();
     const body = this.allTogether();
-    console.log('url', environment);
-    console.log('route',  `${environment.server}/tree/addTreeUser`);
-    this.http
+    console.log('SENDING BODY:', body);
+    const request = this.http
       .post(
         `${environment.server}/tree/addTreeUser`,
         body,
         {
           headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        })
-      .subscribe((data: any) => {
-        console.log(data);
-        if (data.status === 'ok') {
-          console.log('all good, congratulations');
-        }
-      });
+        });
+    request.pipe(
+      map(val => this.message = val)
+    );
+    return request;
   }
 
+  /** form body before sending request to backend */
   allTogether(): string {
-    const jsonBody = `{
+    const jsonBody = `
+    {
       "strom":${JSON.stringify(this.T.S)},
       "lokal":${JSON.stringify(this.T.L)},
       "pisemneD":${JSON.stringify(this.T.PD)},
@@ -59,19 +67,27 @@ export class AddTreeService implements OnDestroy {
     return jsonBody;
   }
 
-  parseKateg = () => {
-    console.log(this.kData)
+  /** prepare data before forming body
+   * classification matrix on strings and some hardcoded fields for now 
+   */
+  prepareData = () => {
     for (let i = 0; i < this.kData.length; i++) {
       let row = `${this.kData[i][0]}`;
 
       for (let j = 1; j < this.kData[i].length; j++) {
         row += `,${this.kData[i][j]}`;
       }
-      this.T.K[`KATEG${ i + 1 }`] = row;
+      this.T.K[`KATEG${i + 1}`] = row;
     }
+    if (this.T.S.DATIN instanceof Date) {
+      this.T.S.DATIN = `${this.T.S.DATIN.getDate()}.${this.T.S.DATIN.getMonth()}.${this.T.S.DATIN.getFullYear()}`;
+    }
+
+    // TODO this should be filled by form
+    this.T.S.VLAST = 'APPVS';
+    this.T.OD.URL[0] = 'someURL';
+    this.T.PD.URL[0] = 'someURL';
   }
 
-  ngOnDestroy() {
-    console.log('Im destroyed');
-  }
+  ngOnDestroy() { }
 }

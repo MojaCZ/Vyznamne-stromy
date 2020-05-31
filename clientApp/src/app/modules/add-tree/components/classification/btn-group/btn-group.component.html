@@ -10,6 +10,8 @@
         [value]="j+1"
         [checked]=checkedArray[j+1]
         (change)="getValues(j+1)"
+        matTooltip={{btn}} 
+        matTooltipPosition="above" 
         >
         {{j+1}}
       </mat-radio-button>

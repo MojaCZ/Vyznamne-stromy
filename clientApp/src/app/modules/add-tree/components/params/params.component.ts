@@ -24,21 +24,20 @@ export class ParamsComponent implements OnInit {
   objectTypes: SelectInterface[] = [];
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private addTreeService: AddTreeService) {
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private addTreeService: AddTreeService) {
+
     this.T = addTreeService.T;
     this.T.S.DATIN = new Date();
 
     for (const type of TreeTypes) { // input select types
       this.objectTypes.push({ value: type, viewValue: type });
     }
-
   }
 
   ngOnInit() {
-    this.getLocation();
     this.route.data.subscribe(data => this.configData = data.config);
     this.formGroup = this.formBuilder.group({
       lonCtrl: [this.T.L.LON],
@@ -46,9 +45,10 @@ export class ParamsComponent implements OnInit {
       typeCtrl: [this.T.S.TYP_OBJ, Validators.required],
       nameCtrl: [this.T.S.NAME],
       dateCtrl: [this.T.S.DATIN],
+      commentCtrl: [this.T.C.COM_U, Validators.maxLength(150)],
     });
+    this.getLocation();
   }
-
 
   /** get device location and set it in service */
   getLocation() {
@@ -57,8 +57,10 @@ export class ParamsComponent implements OnInit {
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude.toString();
         const lon = position.coords.longitude.toString();
+        const lat = position.coords.latitude.toString();
+        this.formGroup.controls.lonCtrl.setValue(lon);
+        this.formGroup.controls.latCtrl.setValue(lat);
         this.T.L = { LON: lon, LAT: lat };
       });
     } else {
@@ -66,17 +68,31 @@ export class ParamsComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  /** try to submit form
+   * @param categ do I want to process categorization?
+   */
+  submit(categ: boolean) {
     if (this.formGroup.valid) {
       this.T.L.LON = this.formGroup.get('lonCtrl').value;
       this.T.L.LAT = this.formGroup.get('latCtrl').value;
       this.T.S.TYP_OBJ = this.formGroup.get('typeCtrl').value;
       this.T.S.NAME = this.formGroup.get('nameCtrl').value;
       this.T.S.DATIN = this.formGroup.get('dateCtrl').value;
-      this.router.navigate(['/kategorie/0']);
+      this.T.C.COM_U = this.formGroup.get('commentCtrl').value;
+      if (categ) {  // process categorization
+        this.router.navigate(['/kategorie/0']);
+      } else {  // fast submit (skip categorization)
+        this.addTreeService.send()
+          .subscribe((data: any) => {
+            console.log(data);
+            if (data.message.status === 'ok') {
+              this.router.navigate(['/done']);
+            } else {
+              alert(`Vyskytla se chyba!, zpráva je: ${data.message.message}`);
+            }
+          });
+      }
     }
   }
-  // [routerLink]="['/kategorie', +kategorie+1]" routerLinkActive="active"
-
 
 }
