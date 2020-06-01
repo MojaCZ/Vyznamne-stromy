@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { LoadedTreesService } from 'src/app/services/loaded-trees.service';
+import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../lib/src';
+
 // import { CommentI } from '../../../../../shared/tree.interface';
 
 @Component({
@@ -11,19 +14,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminTreeComponent implements OnInit {
   // @Input() date;
+  tree: Tree;
+  treeId: number;
 
   baseFormGroup: FormGroup;
   dangerFormGroup: FormGroup;
   categoryFormGroup: FormGroup;
   adminFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private loadedTreesService: LoadedTreesService
+    ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       params => {
-        const id = params.id;
-        console.log(`${id}`);
+        this.treeId = params.id;
+        this.tree = this.loadedTreesService.getTreeById(params.id);
+        console.log(this.tree);
       }
     );
 

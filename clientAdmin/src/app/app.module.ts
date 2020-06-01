@@ -21,6 +21,7 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
 import { AddUserComponent } from './components/users/add-user/add-user.component';
 
 // SERVICES
+import { LoadedTreesService } from './services/loaded-trees.service';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { AddUserComponent } from './components/users/add-user/add-user.component
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoadedTreesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

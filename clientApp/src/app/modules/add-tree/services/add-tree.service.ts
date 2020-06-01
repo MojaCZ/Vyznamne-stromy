@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { share } from 'rxjs/operators';
 // import { AddTreeModule } from '../add-tree.module';
-import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../../lib/src';
+import { TreeI, Tree, ClassificationSchema, ClassificationInterface} from '../../../../../../lib/src';
 import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 
@@ -22,6 +22,15 @@ export class AddTreeService implements OnDestroy {
 
   /** message returned from server */
   public message: any;
+
+  /** stored image files apploaded by user */
+  public imageFiles: File[] = [];
+
+  /** maximum number of images */
+  public maxImageN = 3;
+
+  /** stored text files apploaded by user */
+  public textFiles: File[] = [];
 
   constructor(private http: HttpClient) {
     this.ConfKData = ClassificationSchema;

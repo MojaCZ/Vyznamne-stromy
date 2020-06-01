@@ -57,6 +57,7 @@ export interface TreeI {
 }
 
 export class Tree implements TreeI {
+  id: number = 0;
   S: StromI = {
     IDEX: '',
     NAME: '',

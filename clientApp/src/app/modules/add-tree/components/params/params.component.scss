@@ -1,7 +1,17 @@
-.mat-form-field {
+.mat-form-field, .mat-list {
   display: block;
   width: 300px;
   margin-left: 100px;
+}
+.mat-list {
+  margin-bottom: 50px;
+}
+
+::ng-deep {
+  .mat-list-item-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
 .addForm {

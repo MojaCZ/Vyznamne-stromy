@@ -43,6 +43,25 @@
     <input matInput type="string" formControlName="commentCtrl">
   </mat-form-field>
 
+  <mat-list>
+
+    <mat-list-item>
+      <input #fileUpload type="file" (click)="fileUpload.value = null" (change)="onFileSelected($event)" style="display:none">
+      <button mat-mini-fab color="primary" (click)="fileUpload.click()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div mat-line>Přidat fotku</div>
+    </mat-list-item>
+
+    <mat-list-item *ngFor="let image of imageFiles">
+      <button mat-mini-fab color="primary" (click)="deleteImage(image.name)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <div mat-line>{{image.name}}</div>
+    </mat-list-item>
+
+  </mat-list>
+
   <button mat-button (click)="submit(false)" type="submit" class="bottomBTNs" style="width: 100%;">Odeslat</button>
   <button mat-button (click)="submit(true)" type="submit" class="bottomBTNs" style="width: 100%;">Klasifikovat</button>
 
