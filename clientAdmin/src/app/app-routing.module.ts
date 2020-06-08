@@ -16,7 +16,7 @@ const routes: Routes = [
     component: TreesTableComponent
   },
   {
-    path: 'strom/:id',
+    path: 'editTree/:id',
     component: EditTreeComponent
   },
   {

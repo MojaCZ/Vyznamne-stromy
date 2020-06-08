@@ -28,23 +28,34 @@ export class EditTreeComponent implements OnInit {
     private loadedTreesService: LoadedTreesService
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
         this.treeId = params.id;
-        this.tree = this.loadedTreesService.getTreeById(params.id);
-        console.log(this.tree);
+        this.loadedTreesService.getTreeById(params.id).subscribe((data: Tree) => {
+          this.tree = data;
+          console.log(this.tree);
+          this.setFormParams(data);
+        });
       }
-    );
+      );
+    this.initFormParams();
 
+  }
+
+  setFormParams(T: Tree) {
+    this.baseFormGroup.setValue({
+      lonCtrl: T.L.LON,
+      latCtrl: T.L.LAT,
+      typeCtrl: T.S.TYP_OBJ
+    });
+  }
+
+  initFormParams(){
     this.baseFormGroup = this.formBuilder.group({
-      lonControl: [''],
-      latControl: [''],
-      type: [''],
-      rad: [''],
-      celed: [''],
-      rod: [''],
-      podrod: ['']
+      lonCtrl: [''],
+      latCtrl: [''],
+      typeCtrl: [''],
     });
     this.dangerFormGroup = this.formBuilder.group({
       A: [''],
@@ -60,6 +71,6 @@ export class EditTreeComponent implements OnInit {
       comment: ['', Validators.maxLength(300)],
       files: ['']
     });
-
   }
+
 }

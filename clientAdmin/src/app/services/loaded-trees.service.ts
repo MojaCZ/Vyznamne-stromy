@@ -10,6 +10,7 @@ import { Observable, Observer } from 'rxjs';
 
 export class LoadedTreesService implements OnDestroy {
   public loadedTrees: Tree[] = [];
+
   // public T: TreeI = new Tree();
   // public kData: number[][] = [];
   // public ConfKData: ClassificationInterface[];
@@ -30,7 +31,7 @@ export class LoadedTreesService implements OnDestroy {
     const n = 10;
     const body = `start=${start}&n=${n}`;
 
-    const dataObservable: Observable<Tree[]> = Observable.create( (observer: Observer<Tree[]>) => {
+    const dataObservable: Observable<Tree[]> = new Observable( (observer: Observer<Tree[]>) => {
       this.http
       .post(
         `${environment.server}/tree/getNTrees`,
@@ -56,10 +57,29 @@ export class LoadedTreesService implements OnDestroy {
     return dataObservable;
   }
 
-  getTreeById(id: string): Tree {
+  getTreeById(id: string): Observable<Tree> {
     const tree: Tree = this.loadedTrees.find(x => `${x.id}` === id);
-    return tree;
+    const treeObservable: Observable<Tree> = new Observable( (observer: Observer<Tree>) => {
+      if (tree) {
+        observer.next(tree);
+        observer.complete();
+      } else {
+        this.http
+        .post(
+          `${environment.server}/tree/getById`,
+          `id=${id}&`,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        }).subscribe((data: Tree) => {
+          observer.next(data);
+          observer.complete();
+        });
+      }
+    });
+    return treeObservable;
   }
+
+
 
   send() {
     // this.prepareData();

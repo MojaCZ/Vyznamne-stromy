@@ -35,6 +35,8 @@ export class EditTreeService implements OnDestroy {
     console.log('HELLO');
     this.initKData();
     this.initDData();
+    console.log('k-data', this.kData);
+    console.log('dangers-data', this.dangersMatrix);
 
   }
 
@@ -50,7 +52,6 @@ export class EditTreeService implements OnDestroy {
   }
 
   initDData() {
-    console.log(Dangers);
     for (const dangerSection in Dangers) {
       if ( Dangers.hasOwnProperty(dangerSection) ) {
         const row: boolean[] = [];
@@ -60,7 +61,6 @@ export class EditTreeService implements OnDestroy {
         this.dangersMatrix.push(row);
       }
     }
-    console.log(this.dangersMatrix)
   }
 
   /** send form to backend and return observable of response */

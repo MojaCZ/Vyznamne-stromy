@@ -10,9 +10,8 @@ import { ClassificationInterface } from '../../../../../../lib/src';
 })
 
 export class ClassificationComponent implements OnInit {
-  @Input() kategorie: number;
   katData: string[];
-  configData: ClassificationInterface;
+  configData: ClassificationInterface[];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +21,7 @@ export class ClassificationComponent implements OnInit {
   }
 
   ngOnInit(){
-      this.configData = this.editTreeService.ConfKData[this.kategorie];
+      this.configData = this.editTreeService.ConfKData;
   }
 
   submit(){

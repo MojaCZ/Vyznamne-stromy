@@ -13,13 +13,13 @@ export function GetTreeById(req: express.Request, res: express.Response, next: e
   treeObservable.subscribe(data => {
     res.status(200).json({
       exist: data.exist,
-      strom: data.S,
-      lokal: data.L,
-      pisemneD: data.PD,
-      obrazoveD: data.OD,
-      kateg: data.K,
-      comment: data.C,
-      ohro: data.O
+      S: data.S,
+      L: data.L,
+      PD: data.PD,
+      OD: data.OD,
+      K: data.K,
+      C: data.C,
+      O: data.O
     })
   })
 }

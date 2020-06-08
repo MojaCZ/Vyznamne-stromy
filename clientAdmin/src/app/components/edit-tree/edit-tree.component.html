@@ -7,31 +7,15 @@
         <ng-template matStepLabel>Základní informace</ng-template>
         <mat-form-field>
           <mat-label>Longitude</mat-label>
-          <input matInput formControlName="lonControl">
+          <input matInput formControlName="lonCtrl">
         </mat-form-field>
         <mat-form-field>
           <mat-label>Latitude</mat-label>
-          <input matInput formControlName="latControl">
+          <input matInput formControlName="latCtrl">
         </mat-form-field>
         <mat-form-field>
           <mat-label>Typ</mat-label>
-          <input matInput formControlName="type">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Řád</mat-label>
-          <input matInput formControlName="rad">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Čeleď</mat-label>
-          <input matInput formControlName="celed">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Rod</mat-label>
-          <input matInput formControlName="rod">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Podrod</mat-label>
-          <input matInput formControlName="podrod">
+          <input matInput formControlName="typeCtrl">
         </mat-form-field>
         <div class="bottomBTNs">
           <button mat-button style="width:100%" matStepperNext>Next</button>
@@ -55,7 +39,7 @@
     <mat-step [stepControl]="categoryFormGroup">
       <form [formGroup]="categoryFormGroup">
         <ng-template matStepLabel>Kategorie</ng-template>
-        <app-classification [kategorie]="0"></app-classification>
+        <app-classification></app-classification>
         <div class="bottomBTNs">
           <button mat-button style="width:50%" matStepperPrevious>Back</button>
           <button mat-button style="width:50%" matStepperNext>Next</button>
