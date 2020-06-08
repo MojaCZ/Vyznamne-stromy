@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoadedTreesService } from 'src/app/services/loaded-trees.service';
 import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../lib/src';
+import { EditTreeService } from 'src/app/services/edit-tree.service';
 
 // import { CommentI } from '../../../../../shared/tree.interface';
 
@@ -25,21 +26,23 @@ export class EditTreeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private loadedTreesService: LoadedTreesService
+    private loadedTreesService: LoadedTreesService,
+    private editTreeService: EditTreeService
     ) { }
 
   ngOnInit() {
+    this.initFormParams();
     this.activatedRoute.params.subscribe(
       params => {
         this.treeId = params.id;
         this.loadedTreesService.getTreeById(params.id).subscribe((data: Tree) => {
           this.tree = data;
-          console.log(this.tree);
+          this.editTreeService.setTree(data);
           this.setFormParams(data);
         });
       }
       );
-    this.initFormParams();
+
 
   }
 
@@ -58,14 +61,8 @@ export class EditTreeComponent implements OnInit {
       typeCtrl: [''],
     });
     this.dangerFormGroup = this.formBuilder.group({
-      A: [''],
-      B: [''],
-      C: [''],
-      D: [''],
-      E: ['']
     });
     this.categoryFormGroup = this.formBuilder.group({
-
     });
     this.adminFormGroup = this.formBuilder.group({
       comment: ['', Validators.maxLength(300)],

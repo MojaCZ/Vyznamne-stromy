@@ -23,11 +23,11 @@ export class BtnGroupComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private addTreeService: EditTreeService
+    private editTreeService: EditTreeService
     ) { }
 
   ngOnInit() {
-    this.groupData = this.addTreeService.ConfKData[0].subCat[this.groupIndex];
+    this.groupData = this.editTreeService.ConfKData[0].subCat[this.groupIndex];
 
     // init array of checked = true/false for displaying checked buttons
     for (let i = 0; i < this.groupData.I; i++) {
@@ -35,7 +35,7 @@ export class BtnGroupComponent implements OnInit {
     }
 
     // read value from AddTreeService, it tells me which button should be activated
-    const buttonIndex = this.addTreeService.kData[this.kategorie][this.groupIndex];
+    const buttonIndex = this.editTreeService.getKData(this.kategorie, this.groupIndex);
     this.checkedArray[buttonIndex] = true;
   }
 
@@ -44,7 +44,7 @@ export class BtnGroupComponent implements OnInit {
    */
   getValues(i: number) {
     // change value of index of checked button in AddTreeService
-    this.addTreeService.kData[this.kategorie][this.groupIndex] = i;
+    this.editTreeService.setKData(this.kategorie, this.groupIndex, i);
   }
 
   /** open info dialog */

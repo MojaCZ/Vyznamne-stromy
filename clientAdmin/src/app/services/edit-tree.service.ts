@@ -18,13 +18,13 @@ import { map } from 'rxjs/operators';
 export class EditTreeService implements OnDestroy {
 
   /** class keeping all informations about tree user is editing */
-  public T: TreeI = new Tree();
+  public T: Tree;
 
   /** matrix of classification elements user filled in */
   public kData: number[][] = [];
 
   /** structure of object holding texts in configuration file */
-  public ConfKData: ClassificationInterface[];
+  public ConfKData: ClassificationInterface[] = ClassificationSchema;
 
   /** message returned from server */
   public message: any;
@@ -32,23 +32,58 @@ export class EditTreeService implements OnDestroy {
   public dangersMatrix: boolean[][] = [];
 
   constructor(private http: HttpClient) {
-    console.log('HELLO');
-    this.initKData();
-    this.initDData();
-    console.log('k-data', this.kData);
-    console.log('dangers-data', this.dangersMatrix);
 
   }
 
+  setTree(T: Tree) {
+    this.T = T;
+    this.initKData();
+    this.initDData();
+  }
+
   initKData() {
-    this.ConfKData = ClassificationSchema;
-    for (let k = 0; k < ClassificationSchema.length; k++) {
-      const kRow = [];
-      for (let subK = 0; subK < ClassificationSchema[k].I; subK++) {
-        kRow.push(0);
-      }
-      this.kData.push(kRow);
+    const K1: number[] = this.T.K.KATEG1.split(',').map((x) => {
+      return parseInt(x, 10);
+    });
+    const K2 = this.T.K.KATEG2.split(',').map((x) => {
+      return parseInt(x, 10);
+    });
+    const K3 = this.T.K.KATEG3.split(',').map((x) => {
+      return parseInt(x, 10);
+    });
+    const K4 = this.T.K.KATEG4.split(',').map((x) => {
+      return parseInt(x, 10);
+    });
+    const K5 = this.T.K.KATEG5.split(',').map((x) => {
+      return parseInt(x, 10);
+    });
+    this.kData = [K1, K2, K3, K4, K5];
+
+    // for( let i = 0; i<this.kData.length; i++) {
+    //   for(let j=0; j<this.kData[i].length; j++) {
+    //     this.setKData(i, j, this.T.K.KATEG1)
+    //   }
+    // }
+  }
+
+  setKData(i: number, j: number, value: number) {
+    if (i >= this.kData.length) {
+      throw new Error('dimI doesnt fit');
     }
+    if (j >= this.kData[i].length) {
+      throw new Error('dimJ doesnt fit');
+    }
+    this.kData[i][j] = value;
+  }
+
+  getKData(i: number, j: number): number {
+    if (i >= this.kData.length) {
+      throw new Error('dimI doesnt fit');
+    }
+    if (j >= this.kData[i].length) {
+      throw new Error('dimJ doesnt fit');
+    }
+    return this.kData[i][j];
   }
 
   initDData() {
