@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import treeRoutes from './routes/tree.routes';
+import databaseRoutes from './routes/database.routes';
 // import usersRoutes from './routes/user.routes';
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 
 //ROUTES
 app.use("/tree", treeRoutes);
+app.use("/exportDatabase", databaseRoutes);
 
 // ERRORS
 interface ResponseError extends Error {
