@@ -24,6 +24,8 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
 
 // SERVICES
 import { EditTreeService } from './services/edit-tree.service';
+import { LoadedTreesService } from './services/loaded-trees.service';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import { EditTreeService } from './services/edit-tree.service';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [ EditTreeService ],
+  providers: [ EditTreeService, LoadedTreesService ],
   bootstrap: [AppComponent],
   entryComponents: [InfoDialogComponent]
 })

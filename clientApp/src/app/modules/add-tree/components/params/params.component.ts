@@ -21,6 +21,8 @@ export class ParamsComponent implements OnInit {
   selectedClass: string;
   T: TreeI;
 
+  imageFiles: File[] = [];
+
   objectTypes: SelectInterface[] = [];
 
   constructor(
@@ -28,7 +30,7 @@ export class ParamsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private addTreeService: AddTreeService) {
-
+    this.imageFiles = this.addTreeService.imageFiles;
     this.T = addTreeService.T;
     this.T.S.DATIN = new Date();
 
@@ -65,6 +67,28 @@ export class ParamsComponent implements OnInit {
       });
     } else {
       console.log('No support for geolocation');
+    }
+  }
+
+  /** on adding new image in input type=file */
+  onFileSelected(event) {
+    // TODO check if file has proper extention
+    if (this.addTreeService.imageFiles.length <= this.addTreeService.maxImageN) {
+      const file = (event.target as HTMLInputElement).files[0];
+      this.addTreeService.imageFiles.push(file);
+    } else {
+      // TODO: throw warning to user
+      console.log('max number of images!!');
+    }
+  }
+
+  /** delete loaded image from array */
+  deleteImage(name: string) {
+    for (let i = 0; i < this.addTreeService.imageFiles.length; i++) {
+      if (this.addTreeService.imageFiles[i].name === name) {
+        this.addTreeService.imageFiles.splice(i, 1);
+        return;
+      }
     }
   }
 

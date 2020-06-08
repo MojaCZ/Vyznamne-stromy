@@ -1,13 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../lib/src';
+import { TreeI, Tree, ClassificationSchema, ClassificationInterface, Weights } from '../../../../lib/src';
 // import { environment } from '../../../../environments/environment';
 import { environment } from '../../environments/environment';
+import { TreesTableDataSource, TreesTableItem } from '../components/trees-table/trees-table-datasource';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable()
 
 export class LoadedTreesService implements OnDestroy {
-  public loadedIDs: number[] = [];
   public loadedTrees: Tree[] = [];
   // public T: TreeI = new Tree();
   // public kData: number[][] = [];
@@ -23,20 +24,41 @@ export class LoadedTreesService implements OnDestroy {
     //   this.kData.push(kRow);
     // }
   }
+  /** tak toto je hnus, to by chtělo trochu upravit */
+  loadTrees(): Observable<Tree[]> {
+    const start = 0;
+    const n = 10;
+    const body = `start=${start}&n=${n}`;
 
-  loadTrees() {
-    const body = `start=0&n=100`;
-    this.http.post(
-      `${environment.server}/tree/getNTrees`,
-      body,
-      {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-      })
-    .subscribe(
-      (data: any) => {
-        console.log(data);
-      }
-    );
+    const dataObservable: Observable<Tree[]> = Observable.create( (observer: Observer<Tree[]>) => {
+      this.http
+      .post(
+        `${environment.server}/tree/getNTrees`,
+        body,
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        })
+      .subscribe(
+        (data: any) => {
+          if (!data.trees) {
+            return;
+          }
+
+          const loadedTrees: Tree[] = [];
+          for (const tree of data.trees) {
+            loadedTrees.push(tree);
+          }
+          this.loadedTrees = loadedTrees;
+          observer.next(loadedTrees);
+          observer.complete();
+        });
+    });
+    return dataObservable;
+  }
+
+  getTreeById(id: string): Tree {
+    const tree: Tree = this.loadedTrees.find(x => `${x.id}` === id);
+    return tree;
   }
 
   send() {
