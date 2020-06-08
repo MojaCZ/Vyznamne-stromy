@@ -10,32 +10,36 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // COMPONENTS
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { AdminTreeComponent } from './components/admin-tree/admin-tree.component';
+import { EditTreeComponent } from './components/edit-tree/edit-tree.component';
 import { TreesTableComponent } from './components/trees-table/trees-table.component';
 import { PrintTreeComponent } from './components/print-tree/print-tree.component';
-import { NewTreeComponent } from './components/new-tree/new-tree.component';
-import { DengerTreeComponent } from './components/denger-tree/denger-tree.component';
-import { DangerTreeNodeComponent } from './components/denger-tree/danger-tree-node/danger-tree-node.component';
+import { DengerTreeComponent } from './components/edit-tree/denger-tree/denger-tree.component';
+import { DangerTreeNodeComponent } from './components/edit-tree/denger-tree/danger-tree-node/danger-tree-node.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { AddUserComponent } from './components/users/add-user/add-user.component';
+import { ClassificationComponent } from './components/edit-tree/classification/classification.component';
+import { BtnGroupComponent } from './components/edit-tree/classification/btn-group/btn-group.component';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 
 // SERVICES
-
+import { EditTreeService } from './services/edit-tree.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    AdminTreeComponent,
+    EditTreeComponent,
     TreesTableComponent,
     PrintTreeComponent,
-    NewTreeComponent,
     DengerTreeComponent,
     DangerTreeNodeComponent,
     ListUsersComponent,
     EditUserComponent,
-    AddUserComponent
+    AddUserComponent,
+    ClassificationComponent,
+    BtnGroupComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { AddUserComponent } from './components/users/add-user/add-user.component
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ EditTreeService ],
+  bootstrap: [AppComponent],
+  entryComponents: [InfoDialogComponent]
 })
 export class AppModule { }

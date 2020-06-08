@@ -5,11 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 // import { CommentI } from '../../../../../shared/tree.interface';
 
 @Component({
-  selector: 'app-admin-tree',
-  templateUrl: './admin-tree.component.html',
-  styleUrls: ['./admin-tree.component.scss']
+  selector: 'app-edit-tree',
+  templateUrl: './edit-tree.component.html',
+  styleUrls: ['./edit-tree.component.scss']
 })
-export class AdminTreeComponent implements OnInit {
+export class EditTreeComponent implements OnInit {
   // @Input() date;
 
   baseFormGroup: FormGroup;

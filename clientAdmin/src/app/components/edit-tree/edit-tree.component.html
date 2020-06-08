@@ -55,6 +55,7 @@
     <mat-step [stepControl]="categoryFormGroup">
       <form [formGroup]="categoryFormGroup">
         <ng-template matStepLabel>Kategorie</ng-template>
+        <app-classification [kategorie]="0"></app-classification>
         <div class="bottomBTNs">
           <button mat-button style="width:50%" matStepperPrevious>Back</button>
           <button mat-button style="width:50%" matStepperNext>Next</button>

@@ -5,7 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { TreesTableDataSource, TreesTableItem } from './trees-table-datasource';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ClassificationSchema, ClassificationInterface, Weights} from '../../../../../lib/src';
+import { ClassificationSchema, ClassificationInterface, Weights } from '../../../../../lib/src';
 
 
 @Component({

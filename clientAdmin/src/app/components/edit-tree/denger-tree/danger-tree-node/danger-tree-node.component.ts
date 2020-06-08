@@ -7,57 +7,56 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DangerTreeNodeComponent implements OnInit {
   @Input() data: any;
-  folded: boolean = false
+  folded = false;
   grades: boolean[] = [];
   mainChecked: boolean;
   mainIndeterminate: boolean;
+
   constructor() {
   }
 
-  ngOnInit(): void {
-    for(let i:number = 0; i<this.data.value.grades.length; i++) {
-      this.grades.push(false)
+  ngOnInit() {
+    console.log(this.data.key, this.data.value);
+    for (const grade of this.data.value.grades) {
+      this.grades.push(false);
     }
-    this.grades[1] = true
-    this.checkAll()
+    this.grades[1] = true;
+    this.checkAll();
   }
 
-  fold(){
-    this.folded = !this.folded
+  fold() {
+    this.folded = !this.folded;
   }
 
-  changeAll(){
-    this.mainChecked = !this.mainChecked
+  changeAll() {
+    this.mainChecked = !this.mainChecked;
     this.mainIndeterminate = false;
-    for(let i:number = 0; i<this.grades.length; i++) {
-      this.grades[i] = this.mainChecked
+    for (let grade of this.grades) {
+      grade = this.mainChecked;
     }
   }
 
   // check all subcheckboxes and if all are checked, return true
-  checkAll():void {
-    let allChecked : boolean = true
-    let noneChecked : boolean = false
+  checkAll() {
+    let allChecked = true;
+    let noneChecked = false;
 
-    for(let i:number = 0; i<this.grades.length; i++) {
-      if(this.grades[i]) {
-        noneChecked = true
+    for (const grade of this.grades) {
+      if (grade) {
+        noneChecked = true;
       } else {
         allChecked = false;
       }
     }
 
-    if(allChecked) {  // all checkboxes are checked
-      console.log("ALL CHECKED")
+    if (allChecked) {  // all checkboxes are checked
       this.mainIndeterminate = false;
       this.mainChecked = true;
     } else {
-      console.log("SOME CHECKED")
       this.mainChecked = false;
-      if(noneChecked) { // non of the checkboxes is checked
+      if (noneChecked) { // non of the checkboxes is checked
         this.mainIndeterminate = true;
       } else {  // some are checked
-        console.log("SOME ARE CHECKED")
         this.mainIndeterminate = false;
       }
     }
