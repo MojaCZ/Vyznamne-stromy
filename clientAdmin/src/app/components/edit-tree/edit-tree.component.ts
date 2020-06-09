@@ -37,6 +37,7 @@ export class EditTreeComponent implements OnInit {
         this.treeId = params.id;
         this.loadedTreesService.getTreeById(params.id).subscribe((data: Tree) => {
           this.tree = data;
+          this.tree.S.DATAK = new Date();
           this.editTreeService.setTree(data);
           this.setFormParams(data);
         });
@@ -49,7 +50,8 @@ export class EditTreeComponent implements OnInit {
       lonCtrl: T.L.LON,
       latCtrl: T.L.LAT,
       typeCtrl: T.S.TYP_OBJ,
-      commUCtrl: T.C.COM_U
+      commUCtrl: T.C.COM_U,
+      dateAktCtrl: T.S.DATAK
     });
   }
 
@@ -59,6 +61,7 @@ export class EditTreeComponent implements OnInit {
       latCtrl: [''],
       typeCtrl: [''],
       commUCtrl: [''],
+      dateAktCtrl: ['']
     });
     this.dangerFormGroup = this.formBuilder.group({
     });

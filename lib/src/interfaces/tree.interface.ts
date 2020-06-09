@@ -3,8 +3,8 @@ export interface StromI {
   NAME: string|null;
   TYP_OBJ: string;
   DATIN: string | Date;
-  DATAK: string | null;
-  DATVY: string | null;
+  DATAK: string | Date | null;
+  DATVY: string | Date | null;
   VLAST: string;
   EXURL: string | null;
   IDNAZ: string | null;
