@@ -11,14 +11,14 @@ import { Dangers} from '../../../../../../lib/src';
   styleUrls: ['./denger-tree.component.scss']
 })
 export class DengerTreeComponent implements OnInit {
-  
-  dangerStructure: any = Dangers;
+
+  dangerStructure = Dangers;
 
   constructor() {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // this.route.data.subscribe(data => {
     //   console.log(data)
     //   this.dangerStructure = data.Config.dangers;

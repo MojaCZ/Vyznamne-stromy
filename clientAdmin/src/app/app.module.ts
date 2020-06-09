@@ -21,6 +21,7 @@ import { AddUserComponent } from './components/users/add-user/add-user.component
 import { ClassificationComponent } from './components/edit-tree/classification/classification.component';
 import { BtnGroupComponent } from './components/edit-tree/classification/btn-group/btn-group.component';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+import { DownloadsComponent } from './components/downloads/downloads.component';
 
 // SERVICES
 import { EditTreeService } from './services/edit-tree.service';
@@ -32,6 +33,7 @@ import { LoadedTreesService } from './services/loaded-trees.service';
     AppComponent,
     NavigationComponent,
     EditTreeComponent,
+    DownloadsComponent,
     TreesTableComponent,
     PrintTreeComponent,
     DengerTreeComponent,

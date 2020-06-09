@@ -14,13 +14,12 @@ export class ClassificationComponent implements OnInit {
   configData: ClassificationInterface[];
 
   constructor(
-    private editTreeService: EditTreeService
+    public editTreeService: EditTreeService
     ) {
   }
 
   ngOnInit(){
       this.configData = this.editTreeService.ConfKData;
-      console.log("DATAAAAAAA", this.configData)
   }
 
   submit(){

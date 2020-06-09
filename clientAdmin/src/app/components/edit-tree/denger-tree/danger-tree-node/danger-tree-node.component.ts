@@ -16,7 +16,6 @@ export class DangerTreeNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data.key, this.data.value);
     for (const grade of this.data.value.grades) {
       this.grades.push(false);
     }

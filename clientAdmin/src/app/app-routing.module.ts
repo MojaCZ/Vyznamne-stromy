@@ -6,6 +6,7 @@ import { EditTreeComponent } from './components/edit-tree/edit-tree.component';
 import { TreesTableComponent } from './components/trees-table/trees-table.component';
 import { PrintTreeComponent } from './components/print-tree/print-tree.component';
 import { ListUsersComponent } from './components/users/list-users/list-users.component';
+import { DownloadsComponent } from './components/downloads/downloads.component';
 
 // SERVICES
 
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: ListUsersComponent
+  },
+  {
+    path: 'downloads',
+    component: DownloadsComponent
   }
 ];
 

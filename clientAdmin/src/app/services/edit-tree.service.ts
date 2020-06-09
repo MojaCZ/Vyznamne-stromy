@@ -1,8 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// import { share } from 'rxjs/operators';
-// import { AddTreeModule } from '../add-tree.module';
+
 import {
   TreeI,
   Tree,
@@ -41,6 +40,7 @@ export class EditTreeService implements OnDestroy {
     this.initDData();
   }
 
+  /** get categ data from loaded tree and fit them into matrix for categ component */
   initKData() {
     const K1: number[] = this.T.K.KATEG1.split(',').map((x) => {
       return parseInt(x, 10);
@@ -58,30 +58,33 @@ export class EditTreeService implements OnDestroy {
       return parseInt(x, 10);
     });
     this.kData = [K1, K2, K3, K4, K5];
-
-    // for( let i = 0; i<this.kData.length; i++) {
-    //   for(let j=0; j<this.kData[i].length; j++) {
-    //     this.setKData(i, j, this.T.K.KATEG1)
-    //   }
-    // }
   }
 
+  /** set a value of kData matrix
+   * @param i index of section that should be edited
+   * @param j index of subSection (question) that should be edited
+   * @param value new value user select that should
+   */
   setKData(i: number, j: number, value: number) {
     if (i >= this.kData.length) {
-      throw new Error('dimI doesnt fit');
+      throw new Error('[setKData] dim I doesnt fit');
     }
     if (j >= this.kData[i].length) {
-      throw new Error('dimJ doesnt fit');
+      throw new Error('[setKData] dim J doesnt fit');
     }
     this.kData[i][j] = value;
   }
-
+  /** get single data from kData matrix
+   * @param i index of section that should be returned
+   * @param j index of subSection (question) that should be returned
+   * @returns selected number
+   */
   getKData(i: number, j: number): number {
     if (i >= this.kData.length) {
-      throw new Error('dimI doesnt fit');
+      throw new Error('[getKData] dim I doesnt fit');
     }
     if (j >= this.kData[i].length) {
-      throw new Error('dimJ doesnt fit');
+      throw new Error('[getKData] dim J doesnt fit');
     }
     return this.kData[i][j];
   }
@@ -102,7 +105,6 @@ export class EditTreeService implements OnDestroy {
   send(): Observable<any> {
     this.prepareData();
     const body = this.allTogether();
-    console.log('SENDING BODY:', body);
     const request = this.http
       .post(
         `${environment.server}/tree/addTreeUser`,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -42,8 +42,6 @@ export class EditTreeComponent implements OnInit {
         });
       }
       );
-
-
   }
 
   setFormParams(T: Tree) {
