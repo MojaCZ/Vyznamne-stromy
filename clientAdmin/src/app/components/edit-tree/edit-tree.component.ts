@@ -47,7 +47,8 @@ export class EditTreeComponent implements OnInit {
     this.baseFormGroup.setValue({
       lonCtrl: T.L.LON,
       latCtrl: T.L.LAT,
-      typeCtrl: T.S.TYP_OBJ
+      typeCtrl: T.S.TYP_OBJ,
+      commUCtrl: T.C.COM_U
     });
   }
 
@@ -56,6 +57,7 @@ export class EditTreeComponent implements OnInit {
       lonCtrl: [''],
       latCtrl: [''],
       typeCtrl: [''],
+      commUCtrl: [''],
     });
     this.dangerFormGroup = this.formBuilder.group({
       A: [''],
