@@ -45,6 +45,7 @@ export class BtnGroupComponent implements OnInit {
   getValues(i: number) {
     // change value of index of checked button in AddTreeService
     this.editTreeService.setKData(this.kategorie, this.groupIndex, i);
+    this.editTreeService.getKValues();
   }
 
   /** open info dialog */

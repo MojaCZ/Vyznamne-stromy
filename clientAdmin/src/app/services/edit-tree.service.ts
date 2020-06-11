@@ -1,16 +1,18 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, ApplicationRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
 
 import {
   TreeI,
   Tree,
   ClassificationSchema,
   ClassificationInterface,
-  Dangers
+  Dangers,
+  Weights
 } from '../../../../lib/src';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { ObserversModule } from '@angular/cdk/observers';
 
 @Injectable()
 
@@ -28,9 +30,14 @@ export class EditTreeService implements OnDestroy {
   /** message returned from server */
   public message: any;
 
+  /** calculated values K and W */
+  public kValuesSubject: Subject<number[]> = new Subject();
+
   public dangersMatrix: boolean[][] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient
+    ) {
 
   }
 
@@ -58,6 +65,8 @@ export class EditTreeService implements OnDestroy {
       return parseInt(x, 10);
     });
     this.kData = [K1, K2, K3, K4, K5];
+    this.getKValues();
+
   }
 
   /** set a value of kData matrix
@@ -87,6 +96,29 @@ export class EditTreeService implements OnDestroy {
       throw new Error('[getKData] dim J doesnt fit');
     }
     return this.kData[i][j];
+  }
+
+  /** calculate values of all Classification categories */
+  getKValues() {
+    const V1 = this.kValue(this.kData[0] , Weights.w1);
+    const V2 = this.kValue(this.kData[1] , Weights.w2);
+    const V3 = this.kValue(this.kData[2] , Weights.w3);
+    const V4 = this.kValue(this.kData[3] , Weights.w4);
+    const V5 = this.kValue(this.kData[4] , Weights.w5);
+    this.kValuesSubject.next([V1, V2, V3, V4, V5]);
+  }
+
+  /** calculate category value (mark) dependent on weights
+   * @param K values submitted by user
+   * @param W weights from configuraton file
+   */
+  kValue(K: number[], W: number[]): number {
+    let V = 0;
+    for (let i = 0; i < K.length; i++) {
+      V += +K[i] * W[i];
+    }
+    V = Math.round(V * 100) / 100;
+    return V;
   }
 
   initDData() {

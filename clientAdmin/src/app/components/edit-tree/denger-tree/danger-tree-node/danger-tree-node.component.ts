@@ -19,7 +19,7 @@ export class DangerTreeNodeComponent implements OnInit {
     for (const grade of this.data.value.grades) {
       this.grades.push(false);
     }
-    this.grades[1] = true;
+    // this.grades[1] = true;
     this.checkAll();
   }
 

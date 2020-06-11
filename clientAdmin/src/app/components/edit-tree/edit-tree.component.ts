@@ -3,10 +3,14 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoadedTreesService } from 'src/app/services/loaded-trees.service';
-import { TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../lib/src';
+import { TreeTypes, TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../lib/src';
 import { EditTreeService } from 'src/app/services/edit-tree.service';
 
 // import { CommentI } from '../../../../../shared/tree.interface';
+interface SelectInterface {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-edit-tree',
@@ -18,6 +22,8 @@ export class EditTreeComponent implements OnInit {
   tree: Tree;
   treeId: number;
 
+  objectTypes: SelectInterface[] = [];
+
   baseFormGroup: FormGroup;
   dangerFormGroup: FormGroup;
   categoryFormGroup: FormGroup;
@@ -28,7 +34,11 @@ export class EditTreeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private loadedTreesService: LoadedTreesService,
     private editTreeService: EditTreeService
-    ) { }
+    ) {
+      for (const type of TreeTypes) { // input select types
+        this.objectTypes.push({ value: type, viewValue: type });
+      }
+    }
 
   ngOnInit() {
     this.initFormParams();

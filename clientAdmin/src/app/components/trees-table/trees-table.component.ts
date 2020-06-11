@@ -74,7 +74,7 @@ export class TreesTableComponent implements AfterViewInit, OnInit {
     });
   }
 
-   /**
+   /** calculate category value (mark) dependent on weights
     * @param K values submitted by user
     * @param W weights from configuraton file
     */
