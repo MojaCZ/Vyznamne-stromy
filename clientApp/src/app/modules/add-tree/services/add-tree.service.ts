@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { share } from 'rxjs/operators';
 // import { AddTreeModule } from '../add-tree.module';
-import { TreeI, Tree, ClassificationSchema, ClassificationInterface} from '../../../../../../lib/src';
+import { TreeI, Tree, ClassificationSchema, ClassificationInterface} from '../../../lib';
 import { environment } from '../../../../environments/environment';
 import { map } from 'rxjs/operators';
 

@@ -1,4 +1,4 @@
-import { StromI } from '../../../lib/src';
+import { StromI } from '../lib';
 
 export class Strom implements StromI {
   IDEX: string | null = null;

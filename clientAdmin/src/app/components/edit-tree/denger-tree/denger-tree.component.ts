@@ -1,8 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { ActivatedRoute } from '@angular/router'
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { Dangers} from '../../../../../../lib/src';
+import { Dangers } from '../../../../lib';
 
 
 @Component({

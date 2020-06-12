@@ -1,9 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TreeI, Tree, ClassificationSchema, ClassificationInterface, Weights } from '../../../../lib/src';
+import { Tree } from '../../lib';
 // import { environment } from '../../../../environments/environment';
 import { environment } from '../../environments/environment';
-import { TreesTableDataSource, TreesTableItem } from '../components/trees-table/trees-table-datasource';
 import { Observable, Observer } from 'rxjs';
 
 @Injectable()

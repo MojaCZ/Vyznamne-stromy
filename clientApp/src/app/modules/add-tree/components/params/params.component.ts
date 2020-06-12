@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TreeTypes, TreeI } from '../../../../../../../lib/src';
+import { TreeTypes, TreeI } from '../../../../lib';
 import { AddTreeService } from '../../services/add-tree.service';
 
 interface SelectInterface {

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddTreeService } from '../../services/add-tree.service';
-import { ClassificationInterface } from '../../../../../../../lib/src';
+import { ClassificationInterface } from '../../../../lib';
 
 @Component({
   selector: 'app-classification',

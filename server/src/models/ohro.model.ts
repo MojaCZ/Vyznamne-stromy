@@ -1,4 +1,4 @@
-import { OhroI } from '../../../lib/src'
+import { OhroI } from '../lib'
 
 export class Ohro implements OhroI {
   OHRO1: string | null = "";

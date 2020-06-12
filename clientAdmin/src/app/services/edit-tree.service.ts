@@ -9,7 +9,7 @@ import {
   ClassificationInterface,
   Dangers,
   Weights
-} from '../../../../lib/src';
+} from '../../lib';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { ObserversModule } from '@angular/cdk/observers';

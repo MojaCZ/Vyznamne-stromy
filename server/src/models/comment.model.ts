@@ -1,4 +1,4 @@
-import {CommentI} from '../../../lib/src';
+import { CommentI } from '../lib';
 
 export class Comment implements CommentI {
   COM_U: string = "";
@@ -9,7 +9,7 @@ export class Comment implements CommentI {
     this.COM_A = querry[0].COM_A;
   }
 
-  getQuerry = (id: number) : string => {
+  getQuerry = (id: number): string => {
     let querry: string = `INSERT INTO 
     comment (strom_id, COM_A, COM_U) 
     VALUES (${id}, ${this.COM_A}, ${this.COM_U});`;

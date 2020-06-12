@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LoadedTreesService } from 'src/app/services/loaded-trees.service';
-import { TreeTypes, TreeI, Tree, ClassificationSchema, ClassificationInterface } from '../../../../../lib/src';
+import { TreeTypes, Tree} from '../../../lib';
 import { EditTreeService } from 'src/app/services/edit-tree.service';
 
 // import { CommentI } from '../../../../../shared/tree.interface';

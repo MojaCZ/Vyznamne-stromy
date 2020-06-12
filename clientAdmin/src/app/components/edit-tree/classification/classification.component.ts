@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { EditTreeService } from '../../../services/edit-tree.service';
-import { ClassificationInterface } from '../../../../../../lib/src';
-import { Observable, Observer } from 'rxjs';
+import { ClassificationInterface } from '../../../../lib';
 
 
 @Component({
